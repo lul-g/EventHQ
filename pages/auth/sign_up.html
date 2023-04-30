@@ -19,16 +19,19 @@
       <h1>Create your account</h1>
       <form id="myform">
         <div class="mb-3">
+          <div class="err"></div>
           <label class="form-label">Email address</label>
+
           <input
             name="email"
             type="email"
+            value="lul@gm.com"
             class="form-control"
             aria-describedby="emailHelp"
           />
         </div>
         <div class="mb-3">
-          <label class="form-label">Password</label>
+          <label class="form-label" value="asd">Password</label>
           <input name="password" type="password" class="form-control" />
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
@@ -60,6 +63,15 @@
         })
           .then(function (response) {
             console.log(response);
+            if (response.status === 200) {
+              let token = response.headers.authorization.split(" ")[1]; // extract token from response header
+              localStorage.setItem("token", token); // store token in local storage
+              const userID = response.data.user.id;
+              localStorage.setItem("userID", userID);
+              window.location.href = `/users/${response.data.id}`;
+            } else {
+              document.querySelector(".err").innerHTML = response.data.message;
+            }
           })
           .catch(function (error) {
             console.log(error);

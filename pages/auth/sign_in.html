@@ -17,9 +17,11 @@
   <body>
     <div class="container">
       <h1>Access your account</h1>
+
       <form id="myform">
         <div class="mb-3">
           <label class="form-label">Email address</label>
+          <div class="err"></div>
           <input
             name="email"
             type="email"
@@ -39,7 +41,8 @@
       integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
       crossorigin="anonymous"
     ></script>
-    <script src="/assets/axios.min.js"></script>
+    <script defer src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
     <script>
       const myform = document.getElementById("myform");
 
@@ -50,7 +53,7 @@
         console.log();
         axios({
           method: "post",
-          url: "/api/auth/signin",
+          url: "/auth/signin",
           data: {
             email: email.value,
             password: password.value,
@@ -59,6 +62,15 @@
         })
           .then(function (response) {
             console.log(response);
+            if (response.status === 200) {
+              let token = response.headers.authorization.split(" ")[1]; // extract token from response header
+              localStorage.setItem("token", token); // store token in local storage
+              const userID = response.data.user.id;
+              localStorage.setItem("userID", userID);
+              window.location.href = `/users/${response.data.id}`;
+            } else {
+              document.querySelector(".err").innerHTML = response.data.message;
+            }
           })
           .catch(function (error) {
             console.log(error);

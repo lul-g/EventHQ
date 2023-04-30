@@ -3,6 +3,7 @@ const fs = require("fs");
 const client = require("./conn/setupDB.js").client;
 const port = process.env.PORT || 5005;
 const app = express();
+const bcrypt = require("bcrypt");
 
 app.use(express.json());
 app.use(express.static("pages"));
@@ -32,6 +33,18 @@ async function auth_signup(req, res) {
     const query = { email: req.body.email };
     console.log(`Query: ${req.body.email}`);
 		const result = await collection.find(query).toArray();
+
+    if (result.length === 0) {
+      // Email is not in the database, so insert it
+      const saltRounds = 10;
+      const hashedPassword = await bcrypt.hash(req.body.password, saltRounds);
+
+      const reponse_insert = await collection.insertOne({ email: req.body.email, password: hashedPassword });
+      console.log(`reponse_insert: ${reponse_insert.insertedId}`)
+      console.log(`Inserted email: ${req.body.email}`);
+    } else {
+      console.log(`Email already exists: ${req.body.email}`);
+    }
     
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
   } catch (err) {

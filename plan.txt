@@ -1,0 +1,23 @@
+FINAL APP
+    --sign up/in page
+    --private page (after login) 
+        features
+            -navbar/footer
+            -view: org/events
+            -list of events
+            -view/save events
+            -view/join orgs
+        pages
+            --detail page for events/orgs
+            --saved events/orgs page
+    --public page is like private but no saving or joining
+
+1
+--complete auth with jwt
+    -sign up/in page
+    -logged in then, 
+        -redirect to private page then display hello, username
+2
+--pull some data from events collection after login
+
+

@@ -3,10 +3,143 @@
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>EventHQ</title>
+    <link
+      rel="shortcut icon"
+      href="/public/assets/favicon.svg"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="/public/assets/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+
+    <!-- fontawesome -->
+    <script
+      src="https://kit.fontawesome.com/b6798fcdf3.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <script defer src="/public/assets/populate.js"></script>
   </head>
   <body>
-    HI there
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">
+        <img
+          src="/public/assets/logo.png"
+          width="30"
+          height="30"
+          class="d-inline-block align-top"
+          alt=""
+        />
+        Event<span class="logo_txt">HQ</span>
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active pr-5">
+            <a class="nav-link" href="#"
+              >Home <span class="sr-only">(current)</span></a
+            >
+          </li>
+          <li class="nav-item pr-5">
+            <a class="nav-link" href="#">Link#1</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link#2</a>
+          </li>
+        </ul>
+        <div class="flex">
+          <button class="btn btn-light my-2 my-sm-0" type="submit">
+            Signup</button
+          ><button class="btn btn-outline-light my-2 my-sm-0" type="submit">
+            Login
+          </button>
+        </div>
+      </div>
+    </nav>
+    <div class="main mt-5">
+      <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <label
+          class="view-btn btn btn-outline-dark active"
+          data-toggle="events"
+        >
+          <input
+            class=""
+            type="radio"
+            name="options"
+            id="option1"
+            autocomplete="off"
+            checked
+          />
+          Events
+        </label>
+        <label class="view-btn btn btn-outline-dark" data-toggle="orgs">
+          <input type="radio" name="options" id="option2" autocomplete="off" />
+          Orgs
+        </label>
+      </div>
+      <div class="container grid-center">
+        <div
+          class="data-cards mt-5 d-flex flex-row align-items-center justify-content-evenly flex-wrap"
+          style="max-width: fit-content !important"
+        ></div>
+      </div>
+    </div>
+
+    <footer class="container">
+      <div
+        class="d-flex justify-content-sm-between justify-content-center align-items-center py-5 mt-5 border-top flew-row flex-wrap"
+      >
+        <p class="mb-0 text-muted order-3">© 2022 Company, Inc</p>
+        <a href="/" class="order-1">
+          <img src="/public/assets/logo.png" alt="" style="width: 50px" />
+        </a>
+        <ul class="nav order-2">
+          <li class="nav-item">
+            <a href="#" class="nav-link px-2 text-muted">Home</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link px-2 text-muted">Features</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link px-2 text-muted">About</a>
+          </li>
+        </ul>
+      </div>
+    </footer>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>

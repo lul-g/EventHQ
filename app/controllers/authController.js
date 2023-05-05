@@ -1,10 +1,6 @@
-const express = require("express");
-const open = require("open");
-const fs = require("fs");
-const client = require("./conn/setupDB.js").client;
-const port = process.env.PORT || 5005;
-const app = express();
+const client = require("../utils/database").client;
 const bcrypt = require("bcrypt");
+const path = require("path");
 
 const jwt = require("jsonwebtoken");
 const jwt_expiration = 86400000;
@@ -12,46 +8,7 @@ const jwtsalt = "privatekey";
 
 const salt = "$2b$10$Imnq7Q2r0RS7DqaKV0rpPe";
 
-app.use(express.json());
-app.use(express.static("pages"));
-
-// ROUTES -
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
-
-app.get("/users/:user", async (req, res) => {
-  //   userId = await checkUser(req.cookies["jwt"]);
-  res.status(200).send(fs.readFileSync("./pages/private.html", "utf-8"));
-});
-
-app.get("/auth/signup", (req, res) => {
-  res.status(200).send(fs.readFileSync("./pages/auth/sign_up.html", "utf-8"));
-});
-app.get("/auth/signin", (req, res) => {
-  res.status(200).send(fs.readFileSync("./pages/auth/sign_in.html", "utf-8"));
-});
-
-// API
-// app.get("/api/user", authenticateToken, (req, res) => {
-//   res.json({ email: req.user.email });
-// });
-
-// HANDLE CLIENT REQUEST
-app.post("/auth/signup", (req, res) => {
-  auth_signup(req, res);
-});
-
-app.post("/auth/signin", (req, res) => {
-  auth_signin(req, res);
-});
-
-app.listen(port, async () => {
-  console.log(`EventHQ served: http://localhost:${port}/auth/signup`);
-  await open(`http://localhost:${port}/auth/signup`);
-});
-
-async function auth_signup(req, res) {
+async function signup(req, res) {
   try {
     await client.connect();
 
@@ -97,7 +54,7 @@ async function auth_signup(req, res) {
   }
 }
 
-async function auth_signin(req, res) {
+async function login(req, res) {
   try {
     await client.connect();
     // console.log(`Request Body: ${req.body}`);
@@ -139,3 +96,5 @@ async function auth_signin(req, res) {
     await client.close();
   }
 }
+
+module.exports = { login, signup };

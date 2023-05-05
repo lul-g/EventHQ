@@ -45,13 +45,11 @@ const onSubmit = {
     };
 
     try {
-      const response = await axios.post("/auth/signin", userInfo);
+      const response = await axios.post("/auth/login", userInfo);
       const { data, status, headers } = response;
 
       const token = headers.authorization.split(" ")[1];
       localStorage.setItem("token", token);
-      console.log("Succ: ", data);
-      console.log(data.user.id);
       localStorage.setItem("username", data.user.id);
       window.location.href = `/users/${data.user.id}`;
     } catch (error) {

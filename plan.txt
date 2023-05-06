@@ -21,3 +21,6 @@ FINAL APP
 --pull some data from events collection after login
 
 
+
+
+****IMP: use .ejs if u need to create an html template w/c u can populate with js****

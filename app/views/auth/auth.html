@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EventHQ | Auth</title>
+
+    <!-- css/js -->
+    <link rel="stylesheet" href="/auth/assets/style.css" />
+    <script defer src="/auth/assets/active.js"></script>
+    <script defer src="/auth/assets/client.js"></script>
+
+    <!-- fontawesome -->
+    <script
+      src="https://kit.fontawesome.com/b6798fcdf3.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- favicon -->
+    <link rel="shortcut icon" href="./assets/imgs/favicon.svg" />
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="sign in left" id="sign_in">
+        <div class="mini__container">
+          <div class="top">
+            <h1 class="title">sign in</h1>
+            <ul>
+              <li>
+                <a href=""><i class="fa-brands fa-facebook-f"></i></a>
+              </li>
+              <li>
+                <a href=""><i class="fa-brands fa-google-plus-g"></i></a>
+              </li>
+              <li>
+                <a href=""><i class="fa-brands fa-linkedin-in"></i></a>
+              </li>
+            </ul>
+          </div>
+          <div class="btm">
+            <form id="sign_in_form">
+              <p class="err_div txt grey">or use your account</p>
+              <input
+                type="text"
+                name="signin_nameEmail"
+                id="signin_email"
+                placeholder="Email or Username"
+              />
+              <input
+                type="password"
+                name="signin_pwd"
+                id="signin_pwd"
+                placeholder="Password"
+              />
+
+              <a class="txt" href="error.php">forgot password?</a>
+              <button type="submit" name="signin_submit" class="btn txt">
+                sign in
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="sign up right" id="sign_up">
+        <div class="mini__container">
+          <div class="top">
+            <h1 class="title">create account</h1>
+            <ul>
+              <li>
+                <a href=""><i class="fa-brands fa-facebook-f"></i></a>
+              </li>
+              <li>
+                <a href=""><i class="fa-brands fa-google-plus-g"></i></a>
+              </li>
+              <li>
+                <a href=""><i class="fa-brands fa-linkedin-in"></i></a>
+              </li>
+            </ul>
+          </div>
+          <div class="btm">
+            <form id="sign_up_form">
+              <p class="err_div txt grey">or use email for registration</p>
+              <input
+                type="text"
+                name="signup_name"
+                id="signup_name"
+                placeholder="Username"
+              />
+              <input
+                type="email"
+                name="signup_email"
+                id="signup_email"
+                placeholder="Email"
+              />
+              <input
+                type="password"
+                name="signup_pwd"
+                id="signup_pwd"
+                placeholder="Password"
+              />
+              <button type="submit" name="signup_submit" class="txt btn orange">
+                sign up
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="overlay__container">
+        <div class="overlay__color">
+          <div class="overlay__txt left" id="left_txt">
+            <h3 class="title">welcome back!</h3>
+            <p class="txt">
+              To keep connected with us please login with your personal info
+            </p>
+            <h3 class="title mobile">login instead?</h3>
+            <button class="transparent btn txt" id="left">sign in</button>
+            <button class="transparent btn txt mobile" id="mobile_left">
+              sign in
+            </button>
+          </div>
+          <div class="overlay__txt right" id="right_txt">
+            <h3 class="title">hello there!</h3>
+            <p class="txt">
+              Enter your personal details and start your journey!
+            </p>
+            <h3 class="title mobile">new here?</h3>
+            <button class="transparent btn txt" id="right">sign up</button>
+            <button class="transparent btn txt mobile" id="mobile_right">
+              sign up
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script defer src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </body>
+</html>
+
+<!-- err msgs sign in -->
+<!-- 
+    <p class='txt grey err_msg'>fields cannot be empty!</p>
+    <p class='txt grey err_msg'>password is wrong!</p>
+    <p class='txt grey err_msg'>no such username!</p>
+
+ -->
+
+<!-- _err msg signup -->
+<!-- 
+    <p class='err_msg txt grey'>username and email are invalid!</p>
+    <p class='err_msg txt grey'>invalid username!</p>
+    <p class='err_msg txt grey'>invalid email!</p>
+    <p class='err_msg txt grey'>username already exists!</p>
+    <p class='err_msg txt grey'>password is too short!</p>
+    <p class='err_msg txt grey'>fields cannot be empty!</p>
+  -->

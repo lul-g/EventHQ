@@ -1,0 +1,105 @@
+.profile_icon {
+  --size: 2rem;
+  width: var(--size);
+  height: var(--size);
+  position: relative;
+
+  border: 1px solid #ff426b;
+  border-radius: 5px;
+}
+.profile_icon::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  content: attr(data-usernameInit);
+  color: #f8f9fa;
+}
+.profile_icon_cont:hover > .row > .profile_icon {
+  transition: all 0.3s ease;
+  background-color: #ff426b;
+  color: #343a40;
+}
+.navbar-brand {
+  margin-right: 10rem !important;
+}
+.navbar-nav {
+  justify-content: space-between;
+}
+.flex .navbar-brand {
+  margin-right: 2rem !important;
+}
+.flex {
+  display: flex;
+  align-items: center;
+}
+.logo_txt {
+  color: #f8f9fa;
+}
+
+.main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.btn {
+  cursor: pointer;
+}
+.card {
+  transition: all ease 0.3s;
+}
+.card:hover {
+  box-shadow: 0 0 2rem 0rem #343a4071;
+  transition: all ease 0.3s;
+}
+.grid-center {
+  display: grid;
+  place-items: center;
+}
+.d-flex {
+  gap: 1rem;
+}
+.text-muted {
+  text-transform: capitalize;
+}
+.card-body {
+  position: relative;
+  z-index: 1 !important;
+}
+.fav {
+  z-index: 999999 !important;
+  cursor: pointer;
+
+  position: absolute;
+  right: 1rem;
+  top: -15%;
+  font-size: 1.5rem;
+
+  width: 3rem;
+  height: 3rem;
+
+  background: #343a40;
+  border-radius: 100%;
+}
+
+.fav i {
+  position: absolute;
+  color: #f8f9fa;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+}
+.text-dark:hover {
+  text-decoration: none !important;
+}
+@media (max-wdith: 1230px) {
+  body {
+    background-color: red !important;
+  }
+  .data-cards {
+    grid-template-columns: repeat(3, auto) !important;
+  }
+}

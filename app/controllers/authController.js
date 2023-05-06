@@ -1,100 +1,105 @@
-const client = require("../utils/database").client;
+const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const path = require("path");
+
+const express = require("express");
+const app = express();
 
 const jwt = require("jsonwebtoken");
 const jwt_expiration = 86400000;
 const jwtsalt = "privatekey";
+const cookieParser = require("cookie-parser");
 
 const salt = "$2b$10$Imnq7Q2r0RS7DqaKV0rpPe";
 
+const User = require("../models/user");
+
+app.use(express.json());
+app.use(cookieParser());
+
 async function signup(req, res) {
   try {
-    await client.connect();
+    const { username, email, password } = req.body;
 
-    const database = client.db("EventHQ");
-    const collection = database.collection("users");
+    const emails_found = await User.findOne({ email });
+    const users_found = await User.findOne({ username });
 
-    const query = { email: req.body.email };
-    const result = await collection.find(query).toArray();
-
-    if (result.length === 0) {
-      // Email is not in the database, so insert it
+    if (emails_found || users_found) {
+      console.log(`Email already exists: ${req.body.email}`);
+      return emails_found
+        ? res.status(406).json({ message: "Email already exists" })
+        : res.status(406).json({ message: "Username already exists" });
+    } else {
       const hashedPassword = await bcrypt
-        .hashSync(req.body.password, salt)
+        .hashSync(password, salt)
         .replace(`${salt}.`, "");
 
-      const reponse_insert = await collection.insertOne({
-        email: req.body.email,
+      let user = new User({
+        username: username,
+        email: email,
         password: hashedPassword,
       });
-      console.log(`reponse_insert: ${reponse_insert.insertedId}`);
-      let token = jwt.sign({ id: req.body.email }, jwtsalt, {
+      const savedUser = await user.save();
+      // console.log(savedUser);
+
+      let token = jwt.sign({ id: savedUser.username }, jwtsalt, {
         expiresIn: jwt_expiration,
       });
-      let decoded = jwt.decode(token); // decode the token
 
       res
         .status(200)
-        .setHeader("Authorization", `Bearer ${token}`)
+        .cookie("_cookie_", token, {
+          httpOnly: true,
+          secure: true,
+          sameSite: "none",
+        })
         .json({
           message: "User authenticated",
-          user: {
-            id: decoded.id,
-          },
+          user: savedUser,
         });
-    } else {
-      console.log(`Email already exists: ${req.body.email}`);
-      return res.status(406).json({ message: "Email already exists" });
     }
   } catch (err) {
     console.log(`Error: ${err}`);
-  } finally {
-    await client.close();
   }
 }
 
 async function login(req, res) {
   try {
-    await client.connect();
-    // console.log(`Request Body: ${req.body}`);
+    const { username, password } = req.body;
 
-    const database = client.db("EventHQ");
-    const collection = database.collection("users");
-
-    const query = { email: req.body.email };
-    const result = await collection.find(query).toArray();
-
-    if (result.length == 0)
-      res.status(406).json({ message: "User is not registered" });
+    const usernameFound = await User.findOne({ username });
+    if (!usernameFound)
+      return res.status(406).json({ message: "User is not registered" });
+    if (
+      usernameFound.password !=
+      bcrypt.hashSync(password, salt).replace(`${salt}.`, "")
+    )
+      return res.status(406).json({ message: "Wrong password" });
     else {
-      if (
-        result[0].password !=
-        bcrypt.hashSync(req.body.password, salt).replace(`${salt}.`, "")
-      )
-        return res.status(406).json({ message: "Wrong password" });
-      else {
-        let token = jwt.sign({ id: req.body.email }, jwtsalt, {
-          expiresIn: jwt_expiration,
-        });
-        let decoded = jwt.decode(token);
+      let token = jwt.sign({ id: usernameFound.username }, jwtsalt, {
+        expiresIn: jwt_expiration,
+      });
 
-        res
-          .status(200)
-          .setHeader("Authorization", `Bearer ${token}`)
-          .json({
-            message: "User authenticated",
-            user: {
-              id: decoded.id,
-            },
-          });
-      }
+      res
+        .status(200)
+        .cookie("_cookie_", token, {
+          httpOnly: true,
+          secure: true,
+          sameSite: "none",
+        })
+        .json({
+          message: "User authenticated",
+          user: usernameFound,
+        });
     }
   } catch (err) {
     console.log(`Error: ${err}`);
-  } finally {
-    await client.close();
   }
 }
 
-module.exports = { login, signup };
+async function logout(req, res) {
+  res.clearCookie("_cookie_");
+  res.json({ message: "Logged out" });
+}
+
+module.exports = { login, signup, logout };

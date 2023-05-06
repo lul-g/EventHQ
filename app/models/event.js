@@ -1,16 +1,20 @@
-/*
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
+const Org = require("./org");
+const User = require("./user");
 
-{ _id: ObjectId, title: String, description: String, start_date: Date, end_date: Date, location: String, category: String, organizers: [ObjectId], attendees: [ObjectId], is_private: Boolean, created_at: Date, updated_at: Date }
+const eventSchema = new Schema({
+  title: { type: String, required: true },
+  description: { type: String, required: true },
+  startDate: { type: Date, required: true },
+  endDate: { type: Date, required: true },
+  location: { type: String, required: true },
+  category: { type: String, required: true },
+  organizers: [{ type: Schema.Types.ObjectId, ref: "Org", required: true }],
+  attendees: [{ type: Schema.Types.ObjectId, ref: "User", required: true }],
+  is_private: { type: Boolean, default: false },
+  createdAt: { type: Date, default: Date.now },
+  updatedAt: { type: Date, default: Date.now },
+});
 
-
-
-Org Collection:
-
-{ _id: ObjectId, name: String, description: String, logo: String, events: [ObjectId], members: [ObjectId], created_at: Date, updated_at: Date }
-
-
-
-Users Collection:
-
-{ _id: ObjectId, name: String, email: String, password: String, events_attending: [ObjectId], events_organizing: [ObjectId], organizations: [ObjectId], created_at: Date, updated_at: Date }
-*/
+module.exports = mongoose.model("Event", eventSchema);

@@ -1,17 +1,40 @@
+.profile_icon {
+  --size: 2rem;
+  width: var(--size);
+  height: var(--size);
+  position: relative;
+
+  border: 1px solid #ff426b;
+  border-radius: 5px;
+}
+.profile_icon::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  content: attr(data-usernameInit);
+  color: #f8f9fa;
+}
+.profile_icon_cont:hover > .row > .profile_icon {
+  transition: all 0.3s ease;
+  background-color: #ff426b;
+  color: #343a40;
+}
 .navbar-brand {
   margin-right: 10rem !important;
 }
 .navbar-nav {
   justify-content: space-between;
 }
+.flex .navbar-brand {
+  margin-right: 2rem !important;
+}
 .flex {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  width: 10rem;
 }
 .logo_txt {
-  color: #ff426b;
+  color: #f8f9fa;
 }
 
 .main {
@@ -43,9 +66,10 @@
 }
 .card-body {
   position: relative;
+  z-index: 1 !important;
 }
 .fav {
-  z-index: 9999 !important;
+  z-index: 999999 !important;
   cursor: pointer;
 
   position: absolute;

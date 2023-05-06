@@ -18,13 +18,9 @@ const onSubmit = {
     try {
       const response = await axios.post("/auth/signup", userInfo);
       const { data, status, headers } = response;
-
-      const token = headers.authorization.split(" ")[1];
-      localStorage.setItem("token", token);
-      console.log("Succ: ", data);
-      console.log(data.user.id);
-      localStorage.setItem("userName", data.user.id);
-      window.location.href = `/users/${data.user.id}`;
+      console.log(response);
+      console.log(document.cookie.split(";"));
+      window.location.href = `/users/${data.user.username}`;
     } catch (error) {
       if (error.response) {
         const { data, status, headers } = error.response;
@@ -35,23 +31,19 @@ const onSubmit = {
   },
   signInRequest: async (event) => {
     event.preventDefault();
-    let email = document.querySelector('[name="signin_email"]');
+    let username = document.querySelector('[name="signin_nameEmail"]');
     let password = document.querySelector('[name="signin_pwd"]');
     let err_div = document.querySelector("#sign_in_form .err_div");
 
     const userInfo = {
-      email: email.value,
+      username: username.value,
       password: password.value,
     };
 
     try {
       const response = await axios.post("/auth/login", userInfo);
       const { data, status, headers } = response;
-
-      const token = headers.authorization.split(" ")[1];
-      localStorage.setItem("token", token);
-      localStorage.setItem("username", data.user.id);
-      window.location.href = `/users/${data.user.id}`;
+      window.location.href = `/users/${data.user.username}`;
     } catch (error) {
       if (error.response) {
         const { data, status, headers } = error.response;

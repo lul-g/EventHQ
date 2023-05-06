@@ -2,7 +2,7 @@ let data_cards = document.querySelector(".data-cards");
 let populateWith = {
   events: () => {
     let content = "";
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 6; i++) {
       content += `
             <div class="card-cont" style="width: 18rem">
             <a href="x.html" class="text-dark card border-dark" style="width: 18rem">

@@ -1,11 +1,19 @@
 const express = require("express");
 const router = express.Router();
-const fs = require("fs");
+const getAll = require("../lib/getAll").getAll;
 
-router.get("/", (req, res) => {
-  res
-    .status(200)
-    .send(fs.readFileSync("./app/views/public/public.html", "utf-8"));
+const user = {
+  firstName: "Tim",
+  lastName: "Cook",
+};
+router.get("/", async (req, res) => {
+  const events = await getAll(req, res, "event");
+  const orgs = await getAll(req, res, "org");
+
+  res.render("public/public", {
+    events: events,
+    orgs: orgs,
+  });
 });
 
 module.exports = router;

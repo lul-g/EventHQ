@@ -59,22 +59,22 @@
   place-items: center;
 }
 .d-flex {
-  gap: 1rem;
+  gap: 3rem 1rem;
 }
 .text-muted {
   text-transform: capitalize;
 }
-.card-body {
+.card-cont {
   position: relative;
-  z-index: 1 !important;
+  z-index: 1;
 }
 .fav {
-  z-index: 999999 !important;
+  z-index: 9999 !important;
   cursor: pointer;
 
   position: absolute;
-  right: 1rem;
-  top: -15%;
+  right: -1rem;
+  top: -2rem;
   font-size: 1.5rem;
 
   width: 3rem;
@@ -91,6 +91,10 @@
   left: 50%;
   transform: translate(-50%, -50%);
   cursor: pointer;
+}
+.fav:hover {
+  transform: scale(1.2);
+  transition: all 0.1s linear;
 }
 .text-dark:hover {
   text-decoration: none !important;

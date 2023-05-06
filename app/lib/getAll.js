@@ -11,10 +11,7 @@ async function getAll(req, res, model) {
   try {
     const allDocs = await Model.find().lean();
     model += "s";
-    return res.status(200).json({
-      message: `All ${model}s fetched`,
-      model: allDocs,
-    });
+    return allDocs;
   } catch (err) {
     console.error(`Error retrieving data: ${err}`);
     res.status(500).json({ error: "Error retrieving data" });

@@ -29,6 +29,9 @@ app.listen(port, async () => {
 connectDB();
 console.log("Server: Connected to db::EventHQ");
 
+app.set("view engine", "ejs");
+app.set("views", "./app/views/");
+
 app.use(express.static("./app/views"));
 
 const authRoutes = require("./app/routes/authRoutes.js");

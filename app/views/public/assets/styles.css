@@ -36,12 +36,12 @@
   place-items: center;
 }
 .d-flex {
-  gap: 1rem;
+  gap: 3rem 2rem;
 }
 .text-muted {
   text-transform: capitalize;
 }
-.card-body {
+.card-cont {
   position: relative;
 }
 .fav {
@@ -49,8 +49,8 @@
   cursor: pointer;
 
   position: absolute;
-  right: 1rem;
-  top: -15%;
+  right: -0.5rem;
+  top: -1.5rem;
   font-size: 1.5rem;
 
   width: 3rem;
@@ -70,12 +70,4 @@
 }
 .text-dark:hover {
   text-decoration: none !important;
-}
-@media (max-wdith: 1230px) {
-  body {
-    background-color: red !important;
-  }
-  .data-cards {
-    grid-template-columns: repeat(3, auto) !important;
-  }
 }

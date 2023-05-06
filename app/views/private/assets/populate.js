@@ -1,4 +1,7 @@
-let data_cards = document.querySelector(".data-cards");
+const urlName = document.location.href.split("username=")[1];
+const urlID = document.location.href.split("/")[4];
+
+document.getElementById("username_txt").innerHTML = urlName;
 
 let populateWith = {
   events: async () => {
@@ -10,14 +13,15 @@ let populateWith = {
       data.model.map((event) => {
         content += `
         <div class="card-cont" style="width: 18rem">
+          <span class="fav">
+                <i class="fa-regular fa-heart"></i>
+          </span>
         <a href="x.html" class="text-dark card border-dark" style="width: 18rem">
           <div class="card-header">
             <h5 class="text-dark">${event.event.title}</h5>
           </div>
           <div class="card-body">
-          <span class="fav">
-                <i class="fa-regular fa-heart"></i>
-          </span>
+          
           <h6 class="card-subtitle mb-2 text-dark">${event.event.startDate}</h6>
           <h6 class="card-subtitle mb-2 text-muted">
             ${event.event.location}
@@ -34,7 +38,6 @@ let populateWith = {
       </div>
       `;
       });
-      console.log(response);
     } catch (error) {
       if (error.response) {
         const { data, status, headers } = error.response;
@@ -51,32 +54,9 @@ let populateWith = {
       const { data, status, headers } = response;
       data.model.map((org) => {
         content += `
-        <div class="card-cont" style="width: 18rem">
-        <a href="x.html" class="text-dark card border-dark" style="width: 18rem">
-          <div class="card-header">
-            <h5 class="text-dark">${org.org.name}</h5>
-          </div>
-          <div class="card-body">
-          <span class="fav">
-                <i class="fa-regular fa-heart"></i>
-          </span>
-          <h6 class="card-subtitle mb-2 text-dark">${org.org.startDate}</h6>
-          <h6 class="card-subtitle mb-2 text-muted">
-            ${org.org.location}
-          </h6>
-          <p class="card-text">
-            ${org.org.description}
-          </p>
-            <div class="card-text mt-3">
-              <i class="fa-solid fa-users"></i>
-              <b>${org.org.members.length} showing up</b>
-            </div>
-          </div>
-        </a>
-      </div>
+   
       `;
       });
-      console.log(response);
     } catch (error) {
       if (error.response) {
         const { data, status, headers } = error.response;
@@ -88,31 +68,46 @@ let populateWith = {
   },
 };
 
-document.querySelectorAll(".data-cards .fav").forEach((heart_cont) => {
-  heart_cont.addEventListener("click", () => {
-    let heart = heart_cont.querySelector(".data-cards .fav i");
-    if (heart.classList.contains("fa-regular")) {
-      heart.classList.remove("fa-regular");
-      heart.classList.add("fa-solid");
-    } else {
-      heart.classList.add("fa-regular");
-      heart.classList.remove("fa-solid");
-    }
-  });
-});
-
 document.querySelectorAll(".btn-group .view-btn").forEach((btn) => {
   btn.addEventListener("click", async () => {
     if (event.target.dataset.model == "events") {
       data_cards.innerHTML = await populateWith.events();
+      listenOnHeart();
     } else {
       data_cards.innerHTML = await populateWith.orgs();
+      listenOnHeart();
     }
   });
 });
 
 const eventsInit = async () => {
   data_cards.innerHTML = await populateWith.events();
+  listenOnHeart();
 };
 
 eventsInit();
+
+function listenOnHeart() {
+  document.querySelectorAll(".card-cont .fav").forEach((icon_cont) => {
+    icon_cont.addEventListener("click", () => {
+      let icon = icon_cont.querySelector("i");
+      if (icon.classList.contains("fa-heart")) {
+        if (icon.classList.contains("fa-regular")) {
+          icon.classList.remove("fa-regular");
+          icon.classList.add("fa-solid");
+        } else {
+          icon.classList.add("fa-regular");
+          icon.classList.remove("fa-solid");
+        }
+      } else {
+        if (icon.classList.contains("fa-plus")) {
+          icon.classList.remove("fa-plus");
+          icon.classList.add("fa-minus");
+        } else {
+          icon.classList.add("fa-plus");
+          icon.classList.remove("fa-minus");
+        }
+      }
+    });
+  });
+}

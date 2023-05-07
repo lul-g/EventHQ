@@ -3,6 +3,7 @@ const router = express.Router();
 const fs = require("fs");
 const checkCookie = require("../middleware/checkCookie").checkCookie;
 const getAll = require("../lib/getAll").getAll;
+const getOne = require("../lib/getOne").getOne;
 
 router.post("/:id", checkCookie, async (req, res) => {
   const allDocs = await getAll(req, res, req.body.model);
@@ -12,18 +13,28 @@ router.post("/:id", checkCookie, async (req, res) => {
   });
 });
 
-router.get("/:id", checkCookie, (req, res) => {
-  res
-    .status(200)
-    .send(fs.readFileSync("./app/views/private/private.html", "utf-8"));
+router.get("/:id", async (req, res) => {
+  const events = await getAll(req, res, "event");
+  const orgs = await getAll(req, res, "org");
+  const user = await getOne(req, res, "user", req.params.id);
+
+  res.render("private/private", {
+    user: user,
+    events: events,
+    orgs: orgs,
+  });
 });
 
 router.get("/", checkCookie, (req, res) => {
   res.json(req.user);
 });
 
-router.get("/:id/profile", checkCookie, (req, res) => {
-  // load ur html for user profile page here
+router.get("/:id/profile", checkCookie, async (req, res) => {
+  const user = await getOne(req, res, "user", req.params.id);
+
+  res.render("private/profile", {
+    user: user,
+  });
 });
 
 module.exports = router;

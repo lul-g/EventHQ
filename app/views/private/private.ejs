@@ -29,7 +29,7 @@
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand links" href="#" data-route="">
+      <a class="navbar-brand links" href="./<%=user._id%>" data-route="">
         <img
           src="/public/assets/logo.png"
           width="30"
@@ -54,36 +54,45 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active pr-5">
-            <a class="nav-link links" href="#" data-route="home"
+            <a class="nav-link links" href="./<%=user._id%>" data-route="home"
               >Home <span class="sr-only">(current)</span></a
             >
           </li>
           <li class="nav-item pr-5">
-            <a class="nav-link links" href="#" data-route="about">About</a>
+            <a class="nav-link links" href="/about" data-route="about">About</a>
           </li>
           <li class="nav-item pr-5">
-            <a class="nav-link links" href="#" data-route="likes">Likes</a>
+            <a
+              class="nav-link links"
+              href="./<%=user._id%>/likes"
+              data-route="likes"
+              >Likes</a
+            >
           </li>
           <li class="nav-item pr-5">
-            <a class="nav-link links" href="#" data-route="emberships"
+            <a
+              class="nav-link links"
+              href="./<%=user._id%>/memberships"
+              data-route="emberships"
               >Memberships</a
             >
           </li>
           <li class="nav-item">
-            <a class="nav-link links" href="#" data-route="contact">Contact</a>
+            <a class="nav-link links" href="/contact" data-route="contact"
+              >Contact</a
+            >
           </li>
         </ul>
         <div class="d-flex">
           <a
             class="links d-flex align-items-center justify-content-center text-decoration-none profile_icon_cont"
-            href="#"
+            href="./<%=user._id%>/profile"
           >
             <div class="row align-items-center">
               <div class="col profile_icon" data-usernameInit="U"></div>
-              <span
-                class="col logo_txt text-capitalize"
-                id="username_txt"
-              ></span>
+              <span class="col logo_txt text-capitalize" id="username_txt"
+                ><%=user.username%></span
+              >
             </div>
           </a>
           <button
@@ -116,8 +125,73 @@
       </div>
       <div class="container row justify-content-center">
         <div
-          class="data-cards mt-5 d-flex align-items-start justify-content-center flex-wrap"
-        ></div>
+          data-model-data="events"
+          class="events d-flex data-cards mt-5 align-items-start justify-content-center flex-wrap"
+        >
+          <% events.forEach((event)=> { %>
+          <div class="card-cont" style="width: 18rem">
+            <span class="fav">
+              <i class="fa-regular fa-heart"></i>
+            </span>
+            <a
+              href="events/<%=event._id%>"
+              class="text-dark card border-dark"
+              style="width: 18rem"
+            >
+              <div class="card-header">
+                <h5 class="text-dark"><%= event.event.title%></h5>
+              </div>
+              <div class="card-body">
+                <h6 class="card-subtitle mb-2 text-dark">
+                  <%= event.event.startDate%>
+                </h6>
+                <h6 class="card-subtitle mb-2 text-muted">
+                  <%=event.event.location%>
+                </h6>
+                <p class="card-text"><%=event.event.description%></p>
+                <div class="card-text mt-3">
+                  <i class="fa-solid fa-users"></i>
+                  <b><%= event.event.attendees.length%> showing up</b>
+                </div>
+              </div>
+            </a>
+          </div>
+          <% }) %>
+        </div>
+        <div
+          data-model-data="orgs"
+          class="orgs data-cards mt-5 d-none align-items-start justify-content-center flex-wrap"
+        >
+          <% orgs.forEach((org)=> { %>
+          <div class="card-cont" style="width: 18rem">
+            <span class="fav">
+              <i class="fa-regular fa-heart"></i>
+            </span>
+            <a
+              href="orgs/<%=org._id%>"
+              class="text-dark card border-dark"
+              style="width: 18rem"
+            >
+              <div class="card-header">
+                <h5 class="text-dark"><%= org.org.name%></h5>
+              </div>
+              <div class="card-body">
+                <h6 class="card-subtitle mb-2 text-dark">
+                  <%= org.org.startDate%>
+                </h6>
+                <h6 class="card-subtitle mb-2 text-muted">
+                  <%=org.org.location%>
+                </h6>
+                <p class="card-text"><%=org.org.description%></p>
+                <div class="card-text mt-3">
+                  <i class="fa-solid fa-users"></i>
+                  <b><%= org.org.members.length%> members</b>
+                </div>
+              </div>
+            </a>
+          </div>
+          <% }) %>
+        </div>
       </div>
     </div>
 
@@ -126,24 +200,36 @@
         class="d-flex justify-content-sm-between justify-content-center align-items-center py-5 mt-5 border-top flew-row flex-wrap"
       >
         <p class="mb-0 text-muted order-3">© 2022 Company, Inc</p>
-        <a href="#" class="links order-1">
+        <a href="./<%=user._id%>" class="links order-1">
           <img src="/public/assets/logo.png" alt="" style="width: 50px" />
         </a>
         <ul class="nav order-2">
           <li class="nav-item">
-            <a href="#" class="links nav-link px-2 text-muted">Home</a>
+            <a href="./<%=user._id%>" class="links nav-link px-2 text-muted"
+              >Home</a
+            >
           </li>
           <li class="nav-item">
-            <a href="#" class="links nav-link px-2 text-muted">About</a>
+            <a href="/about" class="links nav-link px-2 text-muted">About</a>
           </li>
           <li class="nav-item">
-            <a href="#" class="links nav-link px-2 text-muted">Likes</a>
+            <a
+              href="./<%=user._id%>/likes"
+              class="links nav-link px-2 text-muted"
+              >Likes</a
+            >
           </li>
           <li class="nav-item">
-            <a href="#" class="links nav-link px-2 text-muted">Memberships</a>
+            <a
+              href="./<%=user._id%>/memberships"
+              class="links nav-link px-2 text-muted"
+              >Memberships</a
+            >
           </li>
           <li class="nav-item">
-            <a href="#" class="links nav-link px-2 text-muted">Contact</a>
+            <a href="/contact" class="links nav-link px-2 text-muted"
+              >Contact</a
+            >
           </li>
         </ul>
       </div>
@@ -151,7 +237,6 @@
 
     <script defer src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
-    <script defer src="/private/assets/populate.js"></script>
     <script defer src="/private/assets/view.js"></script>
     <script defer src="/private/assets/logout.js"></script>
     <script

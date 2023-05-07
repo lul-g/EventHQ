@@ -71,3 +71,62 @@
 .text-dark:hover {
   text-decoration: none !important;
 }
+
+.cont {
+  padding: 5% 0 5% 0;
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+}
+
+figure {
+  width: fit-content;
+  /* display: flex; */
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex-basis: 1;
+}
+
+#profilepic {
+  max-width: 25%;
+  height: auto;
+  justify-content: center;
+  border-radius: 100%;
+  border: 10px solid #555;
+}
+
+.test {
+  text-align: center;
+  margin: 0%, 10%, 0%, 0%;
+}
+
+#about {
+  text-align: center;
+  margin: 3% 10% 4% 10%;
+}
+
+.gallery {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.section {
+  width: 30%;
+  padding: 1rem;
+  background-color: #f2f2f2;
+  text-align: center;
+}
+
+.circle-image {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 10px solid #555;
+}
+
+#fit {
+  overflow-x: hidden; /* remove horizontal scroll bar */
+  margin: 0 20px;
+}

@@ -13,7 +13,7 @@
       href="/private/assets/favicon.svg"
       type="image/x-icon"
     />
-    <link rel="stylesheet" href="/private/assets/styles.css" />
+    <link rel="stylesheet" href="/public/assets/styles.css" />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
@@ -74,7 +74,42 @@
       </div>
     </nav>
 
-    <div class="detailView main mt-5"></div>
+    <div class="eventDetails container mt-5">
+      <h1 class="title"><%=event.title%></h1>
+      <p class="text-muted"><%=event.category%></p>
+      <div class="description container mt-5">
+        <h3 class="title">About this event</h3>
+        <p class="text-muted"><%=event.description%></p>
+      </div>
+      <div
+        class="container d-flex align-items-center justify-content-start mt-5"
+      >
+        <div class="time d-flex align-items-center justify-content-center">
+          <div class="icon">
+            <i class="fa-solid fa-calendar-day"></i>
+          </div>
+          <div class="txt">
+            <h3 class="title">When and where</h3>
+            <p class="text text-muted">
+              <%=new Date(event.startDate).toLocaleString('en-US', { weekday:
+              'short', day: 'numeric', month: 'short', year: 'numeric', hour:
+              'numeric', minute: '2-digit', hour12: true })%>
+            </p>
+          </div>
+        </div>
+        <div class="location d-flex align-items-center justify-content-between">
+          <div class="time d-flex align-items-center justify-content-center">
+            <div class="icon">
+              <i class="fa-solid fa-location-dot"></i>
+            </div>
+            <div class="txt">
+              <h3 class="title">Location</h3>
+              <p class="text text-muted"><%=event.location%></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <footer class="container">
       <div

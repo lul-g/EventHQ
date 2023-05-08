@@ -3,11 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>EventHQ | Profile | <%=user.username%></title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>EventHQ | Contact us</title>
     <link
       rel="shortcut icon"
-      href="/private/assets/favicon.svg"
+      href="/public/assets/favicon.svg"
       type="image/x-icon"
     />
     <link rel="stylesheet" href="/private/assets/styles.css" />
@@ -17,15 +20,22 @@
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
     />
+
     <!-- fontawesome -->
     <script
       src="https://kit.fontawesome.com/b6798fcdf3.js"
       crossorigin="anonymous"
     ></script>
+
+    <script defer src="/public/assets/populate.js"></script>
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand links" href="/users/<%=user._id%>" data-route="">
+      <a
+        class="navbar-brand links"
+        href="../../users/<%=user._id%>"
+        data-route=""
+      >
         <img
           src="/public/assets/logo.png"
           width="30"
@@ -52,7 +62,7 @@
           <li class="nav-item active pr-5">
             <a
               class="nav-link links"
-              href="/users/<%=user._id%>"
+              href="../../users/<%=user._id%>"
               data-route="home"
               >Home <span class="sr-only">(current)</span></a
             >
@@ -112,73 +122,138 @@
         </div>
       </div>
     </nav>
-    <section class="h-100 gradient-custom-2">
-      <div class="container py-5 h-100">
-        <div class="row d-flex justify-content-center align-items-center h-100">
-          <div class="col col-lg-9 col-xl-7">
-            <div class="card" style="position: relative">
-              <a
-                href="/users/<%=user._id%>/profile/edit"
-                id="edit"
-                class="btn btn-light"
-                style="
-                  position: absolute;
-                  top: 1rem;
-                  right: 1rem;
-                  color: #000;
-                  font-size: 1.5rem;
-                "
-              >
-                <i class="fa-solid fa-pen"></i>
-              </a>
-              <div
-                class="rounded-top text-white d-flex flex-row"
-                style="background-color: #000; height: 200px"
-              >
-                <!-- <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;"> <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp" alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2" style="width: 150px; z-index: 1"> <button type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark" style="z-index: 1;"> Edit profile </button> </div> -->
-                <div class="ms-3" style="margin-top: 130px; padding-left: 24px">
-                  <%if(user.firstName) {%>
-                  <h5><%=user.firstName%> <%=user.lastName%></h5>
-                  <%} else {%>
-                  <h5>Your Name Here</h5>
-                  <%}%> <%if(user.location) {%>
-                  <p><%=user.location%></p>
-                  <%} else {%>
-                  <p>Your Location</p>
-                  <%}%>
+
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="wrapper">
+          <div class="row no-gutters">
+            <div class="col-md-6 d-flex align-items-stretch">
+              <div class="contact-wrap w-100 p-md-5 p-4 py-5">
+                <h3 class="mb-4">Write us</h3>
+                <div id="form-message-warning" class="mb-4"></div>
+                <div id="form-message-success" class="mb-4">
+                  Your message was sent, thank you!
                 </div>
+                <form
+                  method="POST"
+                  id="contactForm"
+                  name="contactForm"
+                  class="contactForm"
+                  novalidate="novalidate"
+                >
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="name"
+                          id="name"
+                          placeholder="Name"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <input
+                          type="email"
+                          class="form-control"
+                          name="email"
+                          id="email"
+                          placeholder="Email"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="subject"
+                          id="subject"
+                          placeholder="Subject"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <textarea
+                          name="message"
+                          class="form-control"
+                          id="message"
+                          cols="30"
+                          rows="6"
+                          placeholder="Message"
+                        ></textarea>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <input
+                          type="submit"
+                          value="Send Message"
+                          class="btn btn-dark"
+                        />
+                        <div class="submitting"></div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
               </div>
-              <div class="p-4 text-black" style="background-color: #f8f9fa">
-                <div class="d-flex justify-content-end text-center py-1">
-                  <div>
-                    <p class="mb-1 h5"><%=user.attending.length%></p>
-                    <p class="small text-muted mb-0">Events</p>
-                  </div>
-                  <div class="px-3">
-                    <p class="mb-1 h5"><%=user.attending.length%></p>
-                    <p class="small text-muted mb-0">followers</p>
-                  </div>
-                  <div>
-                    <p class="mb-1 h5"><%=user.memberships.length%></p>
-                    <p class="small text-muted mb-0">Following</p>
-                  </div>
-                </div>
-              </div>
-              <div class="card-body text-black">
-                <p class="lead fw-normal mb-1">About</p>
-                <div class="p-4" style="background-color: #f8f9fa">
+            </div>
+            <div class="col-md-6 d-flex align-items-stretch">
+              <div class="info-wrap w-100 p-md-5 p-4 py-5 img">
+                <h3>Contact information</h3>
+                <p class="mb-4">
+                  We're open for any suggestion or just to have a chat
+                </p>
+                <div class="dbox w-100 d-flex align-items-start">
                   <div
-                    class="d-flex flex-column flex-wrap justify-content-center"
+                    class="icon d-flex align-items-center justify-content-center"
                   >
-                    <%if(user.bio) { %> <% user.bio.forEach((bio)=> { %>
-                    <p class="font-italic mb-0 card" style="padding: 1rem">
-                      <%=bio%>
+                    <span class="fa fa-map-marker"></span>
+                  </div>
+                  <div class="text pl-3">
+                    <p>
+                      <span>Address:</span> 198 West 21th Street, Suite 721 New
+                      York NY 10016
                     </p>
-                    <% }) %> <%} else {%>
-                    <p class="font-italic mb-0 card" style="padding: 1rem">
-                      Your Bio
+                  </div>
+                </div>
+                <div class="dbox w-100 d-flex align-items-center">
+                  <div
+                    class="icon d-flex align-items-center justify-content-center"
+                  >
+                    <span class="fa fa-phone"></span>
+                  </div>
+                  <div class="text pl-3">
+                    <p>
+                      <span>Phone:</span>
+                      <a href="tel://1234567920">+ 1235 2355 98</a>
                     </p>
-                    <%}%>
+                  </div>
+                </div>
+                <div class="dbox w-100 d-flex align-items-center">
+                  <div
+                    class="icon d-flex align-items-center justify-content-center"
+                  >
+                    <span class="fa fa-paper-plane"></span>
+                  </div>
+                  <div class="text pl-3">
+                    <p>
+                      <span>Email:</span>
+                      <a href="mailto:info@yoursite.com">info@yoursite.com</a>
+                    </p>
+                  </div>
+                </div>
+                <div class="dbox w-100 d-flex align-items-center">
+                  <div
+                    class="icon d-flex align-items-center justify-content-center"
+                  >
+                    <span class="fa fa-globe"></span>
+                  </div>
+                  <div class="text pl-3">
+                    <p><span>Website</span> <a href="#">yoursite.com</a></p>
                   </div>
                 </div>
               </div>
@@ -186,19 +261,20 @@
           </div>
         </div>
       </div>
-    </section>
+    </div>
+
     <footer class="container">
       <div
         class="d-flex justify-content-sm-between justify-content-center align-items-center py-5 mt-5 border-top flew-row flex-wrap"
       >
         <p class="mb-0 text-muted order-3">© 2022 Company, Inc</p>
-        <a href="/users/<%=user._id%>" class="links order-1">
+        <a href="../../users/<%=user._id%>" class="links order-1">
           <img src="/public/assets/logo.png" alt="" style="width: 50px" />
         </a>
         <ul class="nav order-2">
           <li class="nav-item">
             <a
-              href="/users/<%=user._id%>"
+              href="../../users/<%=user._id%>"
               class="links nav-link px-2 text-muted"
               >Home</a
             >
@@ -234,11 +310,6 @@
         </ul>
       </div>
     </footer>
-
-    <script defer src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
-    <script defer src="/private/assets/view.js"></script>
-    <script defer src="/private/assets/logout.js"></script>
     <script
       src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
       integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

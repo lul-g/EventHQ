@@ -28,6 +28,20 @@ router.get("/orgs/:id", async (req, res) => {
     org: org,
   });
 });
+router.get("/about", async (req, res) => {
+  const user = await getOne(req, res, "user", req.query.uid);
+
+  res.render("private/about", {
+    user: user,
+  });
+});
+router.get("/contact", async (req, res) => {
+  const user = await getOne(req, res, "user", req.query.uid);
+
+  res.render("private/contact", {
+    user: user,
+  });
+});
 
 router.get("/", (req, res) => {
   res.json(req.user);

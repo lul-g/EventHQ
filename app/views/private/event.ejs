@@ -66,7 +66,9 @@
             >
           </li>
           <li class="nav-item pr-5">
-            <a class="nav-link links" href="/about" data-route="about">About</a>
+            <a class="nav-link links" href="/private/about" data-route="about"
+              >About</a
+            >
           </li>
           <li class="nav-item pr-5">
             <a
@@ -85,7 +87,10 @@
             >
           </li>
           <li class="nav-item">
-            <a class="nav-link links" href="/contact" data-route="contact"
+            <a
+              class="nav-link links"
+              href="/private/contact"
+              data-route="contact"
               >Contact</a
             >
           </li>
@@ -113,8 +118,42 @@
       </div>
     </nav>
 
-    <div class="detailView main mt-5"></div>
-
+    <div class="eventDetails container mt-5">
+      <h1 class="title"><%=event.title%></h1>
+      <p class="text-muted"><%=event.category%></p>
+      <div class="description container mt-5">
+        <h3 class="title">About this event</h3>
+        <p class="text-muted"><%=event.description%></p>
+      </div>
+      <div
+        class="container d-flex align-items-center justify-content-start mt-5"
+      >
+        <div class="time d-flex align-items-center justify-content-center">
+          <div class="icon_E">
+            <i class="fa-solid fa-calendar-day"></i>
+          </div>
+          <div class="txt">
+            <h3 class="title">When and where</h3>
+            <p class="text text-muted">
+              <%=new Date(event.startDate).toLocaleString('en-US', { weekday:
+              'short', day: 'numeric', month: 'short', year: 'numeric', hour:
+              'numeric', minute: '2-digit', hour12: true })%>
+            </p>
+          </div>
+        </div>
+        <div class="location d-flex align-items-center justify-content-between">
+          <div class="time d-flex align-items-center justify-content-center">
+            <div class="icon_E">
+              <i class="fa-solid fa-location-dot"></i>
+            </div>
+            <div class="txt">
+              <h3 class="title">Location</h3>
+              <p class="text text-muted"><%=event.location%></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <footer class="container">
       <div
         class="d-flex justify-content-sm-between justify-content-center align-items-center py-5 mt-5 border-top flew-row flex-wrap"
@@ -132,7 +171,9 @@
             >
           </li>
           <li class="nav-item">
-            <a href="/about" class="links nav-link px-2 text-muted">About</a>
+            <a href="/private/about" class="links nav-link px-2 text-muted"
+              >About</a
+            >
           </li>
           <li class="nav-item">
             <a
@@ -149,7 +190,7 @@
             >
           </li>
           <li class="nav-item">
-            <a href="/contact" class="links nav-link px-2 text-muted"
+            <a href="/private/contact" class="links nav-link px-2 text-muted"
               >Contact</a
             >
           </li>

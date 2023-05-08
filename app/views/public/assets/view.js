@@ -1,16 +1,3 @@
-document.querySelectorAll(".data-cards .fav").forEach((heart_cont) => {
-  heart_cont.addEventListener("click", () => {
-    let heart = heart_cont.querySelector(".data-cards .fav i");
-    if (heart.classList.contains("fa-regular")) {
-      heart.classList.remove("fa-regular");
-      heart.classList.add("fa-solid");
-    } else {
-      heart.classList.add("fa-regular");
-      heart.classList.remove("fa-solid");
-    }
-  });
-});
-
 document.querySelectorAll(".btn-group .view-btn").forEach((btn) => {
   btn.addEventListener("click", () => {
     console.log(event.target.dataset);
@@ -21,5 +8,23 @@ document.querySelectorAll(".btn-group .view-btn").forEach((btn) => {
       document.querySelector(".orgs").classList.replace("d-none", "d-flex");
       document.querySelector(".events").classList.replace("d-flex", "d-none");
     }
+  });
+});
+
+document.querySelectorAll(".fav").forEach((heart) => {
+  heart.addEventListener("click", () => {
+    Toastify({
+      text: "Please Login Or Signup first!",
+      duration: 2000,
+      newWindow: true,
+      close: true,
+      gravity: "top",
+      position: "right",
+      stopOnFocus: true,
+      style: {
+        background: "#ff426b",
+      },
+      destination: "/auth",
+    }).showToast();
   });
 });

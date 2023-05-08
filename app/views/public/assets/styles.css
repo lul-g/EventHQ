@@ -130,3 +130,10 @@ figure {
   overflow-x: hidden; /* remove horizontal scroll bar */
   margin: 0 20px;
 }
+
+.icon i {
+  background-color: #ff426ba8;
+  padding: 1rem;
+  border-radius: 5px;
+  font-size: 1rem;
+}

@@ -4,6 +4,7 @@ const fs = require("fs");
 const checkCookie = require("../middleware/checkCookie").checkCookie;
 const getAll = require("../lib/getAll").getAll;
 const getOne = require("../lib/getOne").getOne;
+const updateOne = require("../lib/updateOne").updateOne;
 
 router.post("/:id", checkCookie, async (req, res) => {
   const allDocs = await getAll(req, res, req.body.model);
@@ -35,6 +36,19 @@ router.get("/:id/profile", checkCookie, async (req, res) => {
   res.render("private/profile", {
     user: user,
   });
+});
+
+router.get("/:id/profile/edit", checkCookie, async (req, res) => {
+  const user = await getOne(req, res, "user", req.params.id);
+
+  res.render("private/edit", {
+    user: user,
+  });
+});
+
+router.put("/:id/profile/edit", checkCookie, async (req, res) => {
+  const user = await updateOne(req, res);
+  res.status(200).send({ user: user });
 });
 
 module.exports = router;

@@ -9,8 +9,8 @@ const orgSchema = new Schema({
   logo: { type: String },
   events: [{ type: Schema.Types.ObjectId, ref: "Event" }],
   members: [{ type: Schema.Types.ObjectId, ref: "User" }],
-  created_at: { type: Date, default: Date.now },
-  updated_at: { type: Date, default: Date.now },
+  createdAt: { type: Date, default: Date.now },
+  updatedAt: { type: Date, default: Date.now },
 });
 
 module.exports = mongoose.model("Org", orgSchema);

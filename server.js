@@ -21,20 +21,25 @@ app.use("*", (req, res, next) => {
 });
 
 app.listen(port, async () => {
-  console.log(`EventHQ served: http://localhost:${port}/auth/signup`);
-  await open(`http://localhost:${port}/auth/signup`);
+  console.log(`EventHQ served: http://localhost:${port}/`);
+  await open(`http://localhost:${port}/`);
 });
 
 // connect to db somewhere
 connectDB();
 console.log("Server: Connected to db::EventHQ");
 
+app.set("view engine", "ejs");
+app.set("views", "./app/views/");
+
 app.use(express.static("./app/views"));
 
 const authRoutes = require("./app/routes/authRoutes.js");
 const privateRoutes = require("./app/routes/privateRoutes.js");
+const detailsRoutes = require("./app/routes/detailsRoutes.js");
 const publicRoutes = require("./app/routes/publicRoutes.js");
 
 app.use("/", publicRoutes);
 app.use("/auth", authRoutes);
 app.use("/users", privateRoutes);
+app.use("/private", detailsRoutes);

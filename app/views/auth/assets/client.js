@@ -20,7 +20,7 @@ const onSubmit = {
       const { data, status, headers } = response;
       console.log(response);
       console.log(document.cookie.split(";"));
-      window.location.href = `/users/${data.user.username}`;
+      window.location.href = `/users/${data.user._id}`;
     } catch (error) {
       if (error.response) {
         const { data, status, headers } = error.response;
@@ -43,7 +43,7 @@ const onSubmit = {
     try {
       const response = await axios.post("/auth/login", userInfo);
       const { data, status, headers } = response;
-      window.location.href = `/users/${data.user.username}`;
+      window.location.href = `/users/${data.user._id}`;
     } catch (error) {
       if (error.response) {
         const { data, status, headers } = error.response;

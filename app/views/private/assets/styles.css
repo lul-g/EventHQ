@@ -40,17 +40,19 @@
 .main {
   display: flex;
   align-items: center;
-  justify-content: center;
   flex-direction: column;
+
+  min-height: 100vh !important;
 }
 
 .btn {
   cursor: pointer;
 }
-.card {
+
+.data-cards .card {
   transition: all ease 0.3s;
 }
-.card:hover {
+.data-cards .card:hover {
   box-shadow: 0 0 2rem 0rem #343a4071;
   transition: all ease 0.3s;
 }
@@ -59,22 +61,22 @@
   place-items: center;
 }
 .d-flex {
-  gap: 1rem;
+  gap: 3rem 1rem;
 }
 .text-muted {
   text-transform: capitalize;
 }
-.card-body {
+.card-cont {
   position: relative;
-  z-index: 1 !important;
+  z-index: 1;
 }
 .fav {
-  z-index: 999999 !important;
+  z-index: 9999 !important;
   cursor: pointer;
 
   position: absolute;
-  right: 1rem;
-  top: -15%;
+  right: -1rem;
+  top: -2rem;
   font-size: 1.5rem;
 
   width: 3rem;
@@ -92,14 +94,75 @@
   transform: translate(-50%, -50%);
   cursor: pointer;
 }
+.fav:hover {
+  transform: scale(1.2);
+  transition: all 0.1s linear;
+}
 .text-dark:hover {
   text-decoration: none !important;
 }
-@media (max-wdith: 1230px) {
-  body {
-    background-color: red !important;
-  }
-  .data-cards {
-    grid-template-columns: repeat(3, auto) !important;
-  }
+.icon_E i {
+  background-color: #ff426ba8;
+  padding: 1rem;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.cont {
+  padding: 5% 0 5% 0;
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+}
+
+figure {
+  width: fit-content;
+  /* display: flex; */
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex-basis: 1;
+}
+
+#profilepic {
+  max-width: 25%;
+  height: auto;
+  justify-content: center;
+  border-radius: 100%;
+  border: 10px solid #555;
+}
+
+.test {
+  text-align: center;
+  margin: 0%, 10%, 0%, 0%;
+}
+
+#about {
+  text-align: center;
+  margin: 3% 10% 4% 10%;
+}
+
+.gallery {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.section {
+  width: 30%;
+  padding: 1rem;
+  background-color: #f2f2f2;
+  text-align: center;
+}
+
+.circle-image {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 10px solid #555;
+}
+
+#fit {
+  overflow-x: hidden; /* remove horizontal scroll bar */
+  margin: 0 20px;
 }

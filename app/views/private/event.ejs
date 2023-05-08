@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>EventHQ | <%=event.title%> Detail</title>
+    <link
+      rel="shortcut icon"
+      href="/private/assets/favicon.svg"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="/private/assets/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+
+    <!-- fontawesome -->
+    <script
+      src="https://kit.fontawesome.com/b6798fcdf3.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a
+        class="navbar-brand links"
+        href="../../users/<%=user._id%>"
+        data-route=""
+      >
+        <img
+          src="/public/assets/logo.png"
+          width="30"
+          height="30"
+          class="d-inline-block align-top"
+          alt=""
+        />
+        Event<span class="logo_txt">HQ</span>
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active pr-5">
+            <a
+              class="nav-link links"
+              href="../../users/<%=user._id%>"
+              data-route="home"
+              >Home <span class="sr-only">(current)</span></a
+            >
+          </li>
+          <li class="nav-item pr-5">
+            <a class="nav-link links" href="/private/about" data-route="about"
+              >About</a
+            >
+          </li>
+          <li class="nav-item pr-5">
+            <a
+              class="nav-link links"
+              href="./<%=user._id%>/likes"
+              data-route="likes"
+              >Likes</a
+            >
+          </li>
+          <li class="nav-item pr-5">
+            <a
+              class="nav-link links"
+              href="./<%=user._id%>/memberships"
+              data-route="emberships"
+              >Memberships</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link links"
+              href="/private/contact"
+              data-route="contact"
+              >Contact</a
+            >
+          </li>
+        </ul>
+        <div class="d-flex">
+          <a
+            class="links d-flex align-items-center justify-content-center text-decoration-none profile_icon_cont"
+            href="./<%=user._id%>/profile"
+          >
+            <div class="row align-items-center">
+              <div class="col profile_icon" data-usernameInit="U"></div>
+              <span class="col logo_txt text-capitalize" id="username_txt"
+                ><%=user.username%></span
+              >
+            </div>
+          </a>
+          <button
+            id="logout"
+            class="btn btn-outline-danger my-2 my-sm-0"
+            type="submit"
+          >
+            Logout
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <div class="eventDetails container mt-5">
+      <h1 class="title"><%=event.title%></h1>
+      <p class="text-muted"><%=event.category%></p>
+      <div class="description container mt-5">
+        <h3 class="title">About this event</h3>
+        <p class="text-muted"><%=event.description%></p>
+      </div>
+      <div
+        class="container d-flex align-items-center justify-content-start mt-5"
+      >
+        <div class="time d-flex align-items-center justify-content-center">
+          <div class="icon_E">
+            <i class="fa-solid fa-calendar-day"></i>
+          </div>
+          <div class="txt">
+            <h3 class="title">When and where</h3>
+            <p class="text text-muted">
+              <%=new Date(event.startDate).toLocaleString('en-US', { weekday:
+              'short', day: 'numeric', month: 'short', year: 'numeric', hour:
+              'numeric', minute: '2-digit', hour12: true })%>
+            </p>
+          </div>
+        </div>
+        <div class="location d-flex align-items-center justify-content-between">
+          <div class="time d-flex align-items-center justify-content-center">
+            <div class="icon_E">
+              <i class="fa-solid fa-location-dot"></i>
+            </div>
+            <div class="txt">
+              <h3 class="title">Location</h3>
+              <p class="text text-muted"><%=event.location%></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="container">
+      <div
+        class="d-flex justify-content-sm-between justify-content-center align-items-center py-5 mt-5 border-top flew-row flex-wrap"
+      >
+        <p class="mb-0 text-muted order-3">© 2022 Company, Inc</p>
+        <a href="../../users/<%=user._id%>" class="links order-1">
+          <img src="/public/assets/logo.png" alt="" style="width: 50px" />
+        </a>
+        <ul class="nav order-2">
+          <li class="nav-item">
+            <a
+              href="../../users/<%=user._id%>"
+              class="links nav-link px-2 text-muted"
+              >Home</a
+            >
+          </li>
+          <li class="nav-item">
+            <a href="/private/about" class="links nav-link px-2 text-muted"
+              >About</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              href="./<%=user._id%>/likes"
+              class="links nav-link px-2 text-muted"
+              >Likes</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              href="./<%=user._id%>/memberships"
+              class="links nav-link px-2 text-muted"
+              >Memberships</a
+            >
+          </li>
+          <li class="nav-item">
+            <a href="/private/contact" class="links nav-link px-2 text-muted"
+              >Contact</a
+            >
+          </li>
+        </ul>
+      </div>
+    </footer>
+
+    <script defer src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script defer src="/private/assets/detail.js"></script>
+    <script defer src="/private/assets/logout.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

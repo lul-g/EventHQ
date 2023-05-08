@@ -36,12 +36,12 @@
   place-items: center;
 }
 .d-flex {
-  gap: 1rem;
+  gap: 3rem 2rem;
 }
 .text-muted {
   text-transform: capitalize;
 }
-.card-body {
+.card-cont {
   position: relative;
 }
 .fav {
@@ -49,8 +49,8 @@
   cursor: pointer;
 
   position: absolute;
-  right: 1rem;
-  top: -15%;
+  right: -0.5rem;
+  top: -1.5rem;
   font-size: 1.5rem;
 
   width: 3rem;
@@ -71,11 +71,69 @@
 .text-dark:hover {
   text-decoration: none !important;
 }
-@media (max-wdith: 1230px) {
-  body {
-    background-color: red !important;
-  }
-  .data-cards {
-    grid-template-columns: repeat(3, auto) !important;
-  }
+
+.cont {
+  padding: 5% 0 5% 0;
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+}
+
+figure {
+  width: fit-content;
+  /* display: flex; */
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex-basis: 1;
+}
+
+#profilepic {
+  max-width: 25%;
+  height: auto;
+  justify-content: center;
+  border-radius: 100%;
+  border: 10px solid #555;
+}
+
+.test {
+  text-align: center;
+  margin: 0%, 10%, 0%, 0%;
+}
+
+#about {
+  text-align: center;
+  margin: 3% 10% 4% 10%;
+}
+
+.gallery {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.section {
+  width: 30%;
+  padding: 1rem;
+  background-color: #f2f2f2;
+  text-align: center;
+}
+
+.circle-image {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 10px solid #555;
+}
+
+#fit {
+  overflow-x: hidden; /* remove horizontal scroll bar */
+  margin: 0 20px;
+}
+
+.icon i {
+  background-color: #ff426ba8;
+  padding: 1rem;
+  border-radius: 5px;
+  font-size: 1rem;
 }

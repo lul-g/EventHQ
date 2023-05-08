@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EventHQ | admin | orgs</title>
+    <link
+      rel="shortcut icon"
+      href="/private/assets/favicon.svg"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="/admin/assets/global_styles.css" />
+    <link rel="stylesheet" href="/admin/entities/orgs/style.css" />
+    <script defer type="module" src="/admin/entities/orgs/orgs.js"></script>
+
+    <!-- Fontawesome -->
+    <script
+      src="https://kit.fontawesome.com/b6798fcdf3.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <a class="btn fixed" href="/admin"
+      ><i class="fa-solid fa-caret-left"></i
+    ></a>
+    <div class="orgs entity">
+      <h1 class="header title__audiowide">Organizations</h1>
+      <div class="orgs__list">
+        <% orgs.forEach((org)=> { %>
+        <a class="card" href="./orgs/detail?orgID=<%=org._id%>">
+          <h4>Name: <%=org.name%></h4>
+          <p>
+            Founded: <%=new Date(org.createdAt).toLocaleString('en-US', {
+            weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })%>
+          </p>
+        </a>
+        <% }) %>
+      </div>
+    </div>
+    <div class="btn btn__right" data-description="Add">
+      <i class="fa-solid fa-plus"></i>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,10 @@
+.entity {
+    width: fit-content;
+    margin-top: 5rem;
+}
+.card {
+    width: 35rem;
+}
+.orgs__list {
+    grid-template-columns: repeat(1, auto);
+}

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EventHQ | admin</title>
+    <link rel="stylesheet" href="/admin/assets/global_styles.css" />
+    <link
+      rel="shortcut icon"
+      href="/private/assets/favicon.svg"
+      type="image/x-icon"
+    />
+
+    <!-- Toastify -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+    />
+    <!-- Fontawesome -->
+    <script
+      src="https://kit.fontawesome.com/b6798fcdf3.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="main__container">
+      <h1 class="title__audiowide">EventHQ</h1>
+      <div class="selection">
+        <div class="users">
+          <a class="entity__card" href="./users"
+            ><i class="fa-solid fa-user-secret"></i>Users</a
+          >
+        </div>
+        <div class="orgs">
+          <a class="entity__card" href="./orgs"
+            ><i class="fa-solid fa-sitemap"></i>Organizations</a
+          >
+        </div>
+        <div class="events">
+          <a class="entity__card" href="./events"
+            ><i class="fa-solid fa-calendar-day"></i>Events</a
+          >
+        </div>
+      </div>
+    </div>
+  </body>
+
+  <!-- Toastify -->
+  <script
+    type="text/javascript"
+    src="https://cdn.jsdelivr.net/npm/toastify-js"
+  ></script>
+  <!-- axios-->
+  <script defer src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</html>

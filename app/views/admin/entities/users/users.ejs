@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EventHQ | admin | users</title>
+    <link
+      rel="shortcut icon"
+      href="/private/assets/favicon.svg"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="/admin/assets/global_styles.css" />
+    <link rel="stylesheet" href="/admin/entities/users/style.css" />
+
+    <!-- Toastify -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+    />
+    <!-- Fontawesome -->
+    <script
+      src="https://kit.fontawesome.com/b6798fcdf3.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <a class="btn fixed" href="/admin"
+      ><i class="fa-solid fa-caret-left"></i
+    ></a>
+    <div
+      class="btn btn__top btn__right"
+      data-description="Add Many"
+      id="addMany"
+    >
+      <i class="fa-solid fa-asterisk"></i>
+    </div>
+    <div class="users entity">
+      <h1 class="header title__audiowide">Users</h1>
+      <div class="users__list">
+        <%if(users.length == 0) {%>
+        <h4>No users in database!</h4>
+        <%} else {%>
+          <% users.forEach((user)=> { %>
+            <%if(user.firstName && user.username != 'admin') {%>
+              <a class="card" href="/admin/users/<%=user._id%>"
+                <h4><%=user.lastName%>, <%=user.firstName%></h4>
+                <p><%=user.location%></p>
+              </a>
+              <%} %>
+            <% }) %>
+          <%}%>
+      </div>
+    </div>
+    <a class="btn btn__right" data-description="Add" href="./create/user">
+      <i class="fa-solid fa-plus"></i>
+    </a>
+
+    <!-- Toastify -->
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/toastify-js"
+    ></script>
+
+    <!-- axios-->
+    <script defer src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+      document.getElementById("addMany").onclick = async () => {
+        try {
+          const response = await axios.post("/admin/users", {
+            model: "user",
+            num: 10,
+          });
+          console.log(response);
+          if (response.status == 200) {
+            Toastify({
+              text: `Multiple users created`,
+              duration: 2000,
+              newWindow: true,
+              close: true,
+              gravity: "top",
+              position: "right",
+              stopOnFocus: true,
+              style: {
+                background: "#019b5d",
+              },
+            }).showToast();
+            setTimeout(() => {
+              Toastify({
+                text: "Refreshing page!",
+                duration: 2000,
+                newWindow: true,
+                close: true,
+                gravity: "top",
+                position: "right",
+                stopOnFocus: true,
+                style: {
+                  background: "#019b5d",
+                },
+              }).showToast();
+            }, 1000);
+
+            setTimeout(() => {
+              window.location.reload();
+            }, 2200);
+          } else {
+            Toastify({
+              text: "Some error occured!",
+              duration: 2000,
+              newWindow: true,
+              close: true,
+              gravity: "top",
+              position: "right",
+              stopOnFocus: true,
+              style: {
+                background: "#ff426b",
+              },
+            }).showToast();
+          }
+        } catch {}
+      };
+    </script>
+  </body>
+</html>

@@ -1,0 +1,189 @@
+@import url("https://fonts.googleapis.com/css2?family=Audiowide&family=Electrolize&display=swap");
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --font-title: ;
+  --bg-clr: #edf2f8;
+  --txt-clr-black: #000000;
+  --txt-clr-grey: #000000a6;
+  --title-clr: #212529;
+  --title-font-audiowide: "Audiowide", cursive;
+  --txt-font-electrolize: "Electrolize", sans-serif;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+
+  background-color: var(--bg-clr);
+}
+a,
+li {
+  text-decoration: none;
+  list-style: none;
+  color: var(--txt-clr-black);
+}
+
+/* shared css between the 3 entity pages */
+.entity {
+  margin: 5rem auto;
+  width: 90vw;
+}
+
+.users__list,
+.events__list,
+.orgs__list {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  gap: 1rem 0;
+}
+
+.entity .header {
+  margin-bottom: 2rem;
+  font-family: var(--title-font-audiowide);
+}
+
+/* components / property classes*/
+.btn.fixed {
+  position: fixed;
+  top: 2.5rem;
+  left: 5rem;
+}
+.btn {
+  font-size: 1.2rem;
+  border: 1px solid #212529;
+  box-shadow: 0 0 0.7rem 0 #21252958;
+  border-radius: 100%;
+
+  width: 2.5rem;
+  height: 2.5rem;
+  line-height: 2.5rem;
+
+  text-align: center;
+
+  cursor: pointer;
+  position: relative;
+}
+.btn::after {
+  content: attr(data-description);
+  position: absolute;
+  top: -2.5rem;
+  right: -5rem;
+
+  font-family: var(--txt-font-electrolize);
+  font-size: 1rem;
+
+  background-color: var(--txt-clr-grey);
+  color: #edf2f8;
+  border-radius: 5px;
+
+  width: 5rem;
+
+  opacity: 0;
+  pointer-events: none;
+}
+.btn:hover::after {
+  opacity: 1;
+  transition: all 0.2s linear 0.7s;
+}
+.btn:hover {
+  background-color: #ffffffbc;
+  box-shadow: 0 0 1.5rem 0 var(--txt-clr-black);
+  transition: all ease 0.3s;
+}
+.btn__top {
+  top: 2.5rem;
+}
+.btn__right {
+  position: fixed;
+  bottom: 5rem;
+  right: 5rem;
+  transform: translate(-50%);
+}
+.btn__normal {
+  font-size: 1.2rem;
+  border: 1px solid #212529;
+  border-radius: 5px;
+  box-shadow: 0 0 0.7rem 0 #212529a4;
+
+  font-size: 1rem;
+  font-family: var(--txt-font-electrolize);
+  font-weight: 600;
+  --size: 5rem;
+  width: var(--size);
+  height: calc(var(--size) / 2);
+  line-height: calc(var(--size) / 2);
+
+  text-align: center;
+
+  cursor: pointer;
+}
+.btn__normal:hover {
+  background-color: #ffffffbc;
+  box-shadow: 0 0 1.5rem 0 var(--txt-clr-black);
+  transition: all ease 0.3s;
+}
+.card {
+  box-shadow: 0 0 0.5rem 0 #939393;
+
+  width: 15rem;
+  padding: 1rem 6rem 1rem 2rem;
+
+  border-radius: 5px;
+  cursor: pointer;
+}
+.title__audiowide {
+  font-family: var(--title-font-audiowide);
+  color: var(--title-clr);
+  font-size: 3rem;
+  font-weight: 100;
+}
+
+/* code for main page */
+.main__container {
+  position: relative;
+  top: 20%;
+  margin: 0 auto;
+  width: 70vw;
+  text-align: center;
+}
+
+.main__container h1 {
+  margin-bottom: 7rem;
+}
+.selection {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.entity__card {
+  box-shadow: 0 0 0.5rem 0 #000;
+
+  text-align: center;
+  padding: 2rem 4rem;
+  border-radius: 10px;
+
+  font-size: 1.3rem;
+  font-family: var(--txt-font-electrolize);
+  color: var(--title-clr);
+  transition: all ease 0.1s;
+
+  display: block;
+}
+.entity__card i {
+  padding-right: 0.5rem;
+  font-size: 1.8rem;
+}
+.entity__card:hover {
+  background-color: #ffffff75;
+  box-shadow: 0 0 2rem 0 #000000b6;
+  transform: scale(1.1);
+  transition: all ease 0.3s;
+}

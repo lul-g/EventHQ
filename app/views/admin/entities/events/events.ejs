@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EventHQ | admin | events</title>
+    <link
+      rel="shortcut icon"
+      href="/private/assets/favicon.svg"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="/admin/assets/global_styles.css" />
+    <link rel="stylesheet" href="/admin/entities/events/style.css" />
+    <script defer type="module" src="/admin/entities/events/users.js"></script>
+
+    <!-- Fontawesome -->
+    <script
+      src="https://kit.fontawesome.com/b6798fcdf3.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <a class="btn fixed" href="/admin"
+      ><i class="fa-solid fa-caret-left"></i
+    ></a>
+    <div class="events entity">
+      <h1 class="header title__audiowide">Events</h1>
+      <div class="events__list">
+        <% events.forEach((event)=> { %>
+        <a class="card" href="./events/detail?eventID=<%=event._id%>">
+          <h4>Event: <%=event.title%></h4>
+        </a>
+        <% }) %>
+      </div>
+    </div>
+    <a class="btn btn__right" data-description="Add" href="./events/create"
+      ><i class="fa-solid fa-plus"></i
+    ></a>
+  </body>
+</html>

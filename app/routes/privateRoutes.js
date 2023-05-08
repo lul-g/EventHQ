@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const fs = require("fs");
 const checkCookie = require("../middleware/checkCookie").checkCookie;
 const getAll = require("../lib/getAll").getAll;
 const getOne = require("../lib/getOne").getOne;
@@ -14,7 +13,7 @@ router.post("/:id", checkCookie, async (req, res) => {
   });
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", checkCookie, async (req, res) => {
   const events = await getAll(req, res, "event");
   const orgs = await getAll(req, res, "org");
   const user = await getOne(req, res, "user", req.params.id);
@@ -41,7 +40,7 @@ router.get("/:id/profile", checkCookie, async (req, res) => {
 router.get("/:id/profile/edit", checkCookie, async (req, res) => {
   const user = await getOne(req, res, "user", req.params.id);
 
-  res.render("private/edit", {
+  res.render("private/editProfile", {
     user: user,
   });
 });

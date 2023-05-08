@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EventHQ | admin | users</title>
+    <link
+      rel="shortcut icon"
+      href="/private/assets/favicon.svg"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="/admin/assets/global_styles.css" />
+    <link rel="stylesheet" href="/admin/entities/users/style.css" />
+    <!-- <script defer type="module" src="/admin/entities/users/users.js"></script> -->
+
+    <!-- Toastify -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+    />
+    <!-- Fontawesome -->
+    <script
+      src="https://kit.fontawesome.com/b6798fcdf3.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <a class="btn fixed" href="/admin/users" data-description="Back"
+      ><i class="fa-solid fa-caret-left"></i
+    ></a>
+    <div class="container">
+      <div class="detail">
+        <%if(user) {%>
+        <h2 class="title_audiowide"><%=user.lastName%>, <%=user.firstName%></h2>
+        <p class="centerText"><%=user.bio%></p>
+        <div class="time">
+          <span> <%=user.location%></span>
+          <span> <%=user.username%></span>
+          <span> <%=user.email%></span>
+        </div>
+        <%}%>
+      </div>
+      <div class="btns">
+        <div class="btn" data-description="Delete" id="delete">
+          <i class="fa-solid fa-trash"></i>
+        </div>
+        <a
+          class="btn"
+          data-description="Edit"
+          id="edit"
+          href="./<%=user._id%>/edit"
+        >
+          <i class="fa-solid fa-pen"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- Toastify -->
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/toastify-js"
+    ></script>
+
+    <!-- axios-->
+    <script defer src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script>
+      document.getElementById("delete").addEventListener("click", () => {
+        CRUD.delete();
+      });
+      const CRUD = {
+        delete: async () => {
+          try {
+            const response = await axios.delete("/admin/users/<%=user._id%>", {
+              model: "user",
+            });
+            if ("!<%user%>") {
+              Toastify({
+                text: "User successfully deleted!",
+                duration: 2000,
+                newWindow: true,
+                close: true,
+                gravity: "top",
+                position: "right",
+                stopOnFocus: true,
+                style: {
+                  background: "#019b5d",
+                },
+              }).showToast();
+              setTimeout(() => {
+                Toastify({
+                  text: "Redirecting you!",
+                  duration: 2000,
+                  newWindow: true,
+                  close: true,
+                  gravity: "top",
+                  position: "right",
+                  stopOnFocus: true,
+                  style: {
+                    background: "#019b5d",
+                  },
+                }).showToast();
+              }, 1000);
+
+              setTimeout(() => {
+                window.location.href = `/admin/users`;
+              }, 2200);
+            } else {
+              Toastify({
+                text: "Some Error Occurred!",
+                duration: 2000,
+                newWindow: true,
+                close: true,
+                gravity: "top",
+                position: "right",
+                stopOnFocus: true,
+                style: {
+                  background: "#ff426b",
+                },
+              }).showToast();
+            }
+          } catch {}
+        },
+      };
+    </script>
+  </body>
+</html>

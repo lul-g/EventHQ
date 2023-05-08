@@ -10,7 +10,8 @@ function checkCookie(req, res, next) {
     // The cookie is not set or doesn't have a value
     console.log("Cookie not found");
     res
-      .status(200)
+      .status(401)
+      .setHeader("Cache-Control", "no-cache, no-store, must-revalidate")
       .send(fs.readFileSync("./app/views/error/unauthorized.html", "utf-8"));
   }
 }

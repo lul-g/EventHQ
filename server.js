@@ -7,6 +7,13 @@ const app = express();
 const cookieParser = require("cookie-parser");
 const open = require("open");
 const connectDB = require("./app/utils/db").connectToDb;
+const cacheControl = require("express-cache-controller");
+
+app.use(
+  cacheControl({
+    noCache: true,
+  })
+);
 app.use(express.json());
 app.use(cookieParser());
 
@@ -38,8 +45,10 @@ const authRoutes = require("./app/routes/authRoutes.js");
 const privateRoutes = require("./app/routes/privateRoutes.js");
 const detailsRoutes = require("./app/routes/detailsRoutes.js");
 const publicRoutes = require("./app/routes/publicRoutes.js");
+const adminRoutes = require("./app/routes/adminRoutes.js");
 
 app.use("/", publicRoutes);
 app.use("/auth", authRoutes);
 app.use("/users", privateRoutes);
 app.use("/private", detailsRoutes);
+app.use("/admin", adminRoutes);

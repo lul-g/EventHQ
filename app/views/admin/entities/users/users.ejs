@@ -24,38 +24,132 @@
       src="https://kit.fontawesome.com/b6798fcdf3.js"
       crossorigin="anonymous"
     ></script>
+
+    <!-- bootstrap -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
   </head>
   <body>
-    <a class="btn fixed" href="/admin"
-      ><i class="fa-solid fa-caret-left"></i
-    ></a>
-    <div
-      class="btn btn__top btn__right"
-      data-description="Add Many"
-      id="addMany"
-    >
-      <i class="fa-solid fa-asterisk"></i>
-    </div>
-    <div class="users entity">
-      <h1 class="header title__audiowide">Users</h1>
-      <div class="users__list">
-        <%if(users.length == 0) {%>
-        <h4>No users in database!</h4>
-        <%} else {%>
-          <% users.forEach((user)=> { %>
-            <%if(user.firstName && user.username != 'admin') {%>
-              <a class="card" href="/admin/users/<%=user._id%>"
-                <h4><%=user.lastName%>, <%=user.firstName%></h4>
-                <p><%=user.location%></p>
-              </a>
-              <%} %>
-            <% }) %>
-          <%}%>
+    <nav class="navbar navbar-expand-xl navbar-dark bg-dark">
+      <a class="navbar-brand links" href="/admin" data-route="">
+        <img
+          src="/public/assets/logo.png"
+          width="30"
+          height="30"
+          class="d-inline-block align-top"
+          alt=""
+        />
+        Event<span class="logo_txt">HQ</span>
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active pr-5">
+            <a class="nav-link links" href="/admin" data-route="home"
+              >Home <span class="sr-only">(current)</span></a
+            >
+          </li>
+          <li class="nav-item pr-5">
+            <a
+              class="nav-link links"
+              href="/private/about?uid=<%=admin._id%>"
+              data-route="about"
+              >About</a
+            >
+          </li>
+          <li class="nav-item pr-5">
+            <a
+              class="nav-link links"
+              href="./<%=admin._id%>/likes"
+              data-route="likes"
+              >Likes</a
+            >
+          </li>
+          <li class="nav-item pr-5">
+            <a
+              class="nav-link links"
+              href="./<%=admin._id%>/memberships"
+              data-route="emberships"
+              >Memberships</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link links"
+              href="/private/contact?uid=<%=admin._id%>"
+              data-route="contact"
+              >Contact</a
+            >
+          </li>
+        </ul>
+        <div class="d-flex">
+          <a
+            href="/admin"
+            id="admin"
+            class="mr-5 btn btn-light my-2 my-sm-0"
+            type="submit"
+          >
+            admin
+          </a>
+
+          <button
+            id="logout"
+            class="btn btn-outline-danger my-2 my-sm-0"
+            type="submit"
+          >
+            Logout
+          </button>
+        </div>
       </div>
+    </nav>
+    <div class="main">
+      <a class="btn_custom fixed" href="/admin"
+        ><i class="fa-solid fa-caret-left"></i
+      ></a>
+      <div
+        class="btn_custom btn__top btn__right"
+        data-description="Add Many"
+        id="addMany"
+      >
+        <i class="fa-solid fa-asterisk"></i>
+      </div>
+      <div class="users entity">
+        <h1 class="header title__audiowide">Users</h1>
+        <div class="users__list">
+          <%if(users.length == 0) {%>
+          <h4>No users in database!</h4>
+          <%} else {%> <% users.forEach((user)=> { %> <%if(user.email &&
+          user.username != 'admin') {%>
+          <a class="card_custom" href="/admin/users/<%=user._id%>">
+            <h4><%=user.firstName%> <%=user.lastName%></h4>
+            <p><%=user.email%></p>
+          </a>
+          <%} %> <% }) %> <%}%>
+        </div>
+      </div>
+      <a
+        class="btn_custom btn__right"
+        data-description="Add"
+        href="/admin/users/create/user"
+      >
+        <i class="fa-solid fa-plus"></i>
+      </a>
     </div>
-    <a class="btn btn__right" data-description="Add" href="./create/user">
-      <i class="fa-solid fa-plus"></i>
-    </a>
 
     <!-- Toastify -->
     <script
@@ -68,58 +162,59 @@
     <script>
       document.getElementById("addMany").onclick = async () => {
         try {
+          toast(`Request for multiple users sent!`, "#019b5d");
           const response = await axios.post("/admin/users", {
-            model: "user",
             num: 10,
           });
           console.log(response);
           if (response.status == 200) {
-            Toastify({
-              text: `Multiple users created`,
-              duration: 2000,
-              newWindow: true,
-              close: true,
-              gravity: "top",
-              position: "right",
-              stopOnFocus: true,
-              style: {
-                background: "#019b5d",
-              },
-            }).showToast();
             setTimeout(() => {
-              Toastify({
-                text: "Refreshing page!",
-                duration: 2000,
-                newWindow: true,
-                close: true,
-                gravity: "top",
-                position: "right",
-                stopOnFocus: true,
-                style: {
-                  background: "#019b5d",
-                },
-              }).showToast();
+              toast("Successfully created multiple users!", "#019b5d");
             }, 1000);
+            setTimeout(() => {
+              toast("Refreshing page!", "#019b5d");
+            }, 2000);
 
             setTimeout(() => {
               window.location.reload();
-            }, 2200);
+            }, 2400);
           } else {
-            Toastify({
-              text: "Some error occured!",
-              duration: 2000,
-              newWindow: true,
-              close: true,
-              gravity: "top",
-              position: "right",
-              stopOnFocus: true,
-              style: {
-                background: "#ff426b",
-              },
-            }).showToast();
+            toast("Some error occured!", "#ff426b");
           }
         } catch {}
       };
+
+      function toast(msg, clr) {
+        Toastify({
+          text: msg,
+          duration: 2000,
+          newWindow: true,
+          close: true,
+          gravity: "top",
+          position: "right",
+          stopOnFocus: true,
+          style: {
+            background: clr,
+          },
+        }).showToast();
+      }
     </script>
+
+    <script defer src="/admin/assets/logout.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>

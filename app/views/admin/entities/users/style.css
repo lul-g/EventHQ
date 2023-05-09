@@ -1,10 +1,15 @@
 :root {
-  --bg-clr: #edf2f8;
-  --txt-clr-black: #000000;
+  --bg-clr: #f8f9fa;
+  --txt-clr-black: #343a40;
   --txt-clr-grey: #000000a6;
-  --title-clr: #212529;
+  --main-clr: #ff426b;
+  --title-clr: #343a40;
   --title-font-audiowide: "Audiowide", cursive;
   --txt-font-electrolize: "Electrolize", sans-serif;
+}
+a,
+li {
+  text-decoration: none !important;
 }
 .users {
   width: fit-content;
@@ -13,14 +18,14 @@
   grid-template-columns: repeat(2, auto);
   width: 50rem;
 }
-.card {
+.card_custom {
   width: 20rem;
 }
 
 /* detail page*/
-.container {
+.container_detail {
   width: 100%;
-  margin-top: 5rem;
+  margin-top: 3rem;
 }
 .detail {
   width: 40vw;
@@ -64,53 +69,4 @@ span i {
   justify-content: center;
   gap: 0 7rem;
   margin-top: 4rem;
-}
-
-/* create page */
-.create {
-  margin: 3rem auto;
-  width: fit-content;
-}
-.create h1 {
-  margin-bottom: 2rem;
-  text-align: center;
-}
-.form {
-  display: flex;
-  align-items: start;
-  justify-content: space-between;
-  gap: 1rem 0;
-  flex-direction: column;
-}
-.form > div {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0 1rem;
-  width: 30rem;
-}
-.form > div label {
-  font-family: var(--txt-font-electrolize);
-  font-weight: 600;
-}
-.form > div input,
-.form > div textarea {
-  width: 20rem;
-
-  border-radius: 4px;
-  padding: 0.5rem 3rem 0.5rem 1rem;
-
-  outline: none;
-  border: none;
-  border: 1px solid;
-}
-.centerText {
-  text-align: center;
-  margin-bottom: var(--mb-val);
-}
-img {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  height: auto;
 }

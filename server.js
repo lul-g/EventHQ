@@ -45,10 +45,16 @@ const authRoutes = require("./app/routes/authRoutes.js");
 const privateRoutes = require("./app/routes/privateRoutes.js");
 const detailsRoutes = require("./app/routes/detailsRoutes.js");
 const publicRoutes = require("./app/routes/publicRoutes.js");
-const adminRoutes = require("./app/routes/adminRoutes.js");
+const rootRoutes = require("./app/routes/adminRoutes.js").rootRouters;
+const usersRoutes = require("./app/routes/adminRoutes.js").usersRouters;
+const eventsRoutes = require("./app/routes/adminRoutes.js").eventsRouters;
+const orgsRoutes = require("./app/routes/adminRoutes.js").orgsRouters;
 
 app.use("/", publicRoutes);
 app.use("/auth", authRoutes);
 app.use("/users", privateRoutes);
 app.use("/private", detailsRoutes);
-app.use("/admin", adminRoutes);
+app.use("/admin", rootRoutes);
+app.use("/admin/users", usersRoutes);
+app.use("/admin/events", eventsRoutes);
+app.use("/admin/orgs", orgsRoutes);

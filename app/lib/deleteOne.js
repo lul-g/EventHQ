@@ -12,8 +12,8 @@ async function deleteOne(req, res, model, id) {
     const delteDoc = await Model.deleteOne({ _id: id });
     return delteDoc;
   } catch (err) {
-    console.error(`Error retrieving data: ${err}`);
-    res.status(500).json({ error: "Error retrieving data" });
+    console.error(`Error deleting data: ${err}`);
+    res.status(500).json({ error: "Error deleting data" });
   }
 }
 

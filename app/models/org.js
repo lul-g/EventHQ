@@ -6,7 +6,7 @@ const Event = require("./event");
 const orgSchema = new Schema({
   name: { type: String, required: true },
   description: { type: String, required: true },
-  logo: { type: String },
+  location: { type: String },
   events: [{ type: Schema.Types.ObjectId, ref: "Event" }],
   members: [{ type: Schema.Types.ObjectId, ref: "User" }],
   createdAt: { type: Date, default: Date.now },

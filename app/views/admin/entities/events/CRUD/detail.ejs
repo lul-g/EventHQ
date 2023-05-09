@@ -4,14 +4,23 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>EventHQ | admin</title>
-    <link rel="stylesheet" href="/admin/assets/global_styles.css" />
+    <title>EventHQ | admin | events</title>
     <link
       rel="shortcut icon"
       href="/private/assets/favicon.svg"
       type="image/x-icon"
     />
+    <link rel="stylesheet" href="/admin/assets/global_styles.css" />
+    <link rel="stylesheet" href="/admin/entities/users/style.css" />
+    <script defer type="module" src="/admin/assets/logout.js"></script>
 
+    <!-- bootstrap -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
     <!-- Toastify -->
     <link
       rel="stylesheet"
@@ -23,15 +32,8 @@
       src="https://kit.fontawesome.com/b6798fcdf3.js"
       crossorigin="anonymous"
     ></script>
-
-    <!-- bootstrap -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-      crossorigin="anonymous"
-    />
   </head>
+
   <body>
     <nav class="navbar navbar-expand-xl navbar-dark bg-dark">
       <a class="navbar-brand links" href="/admin" data-route="">
@@ -97,6 +99,7 @@
           </li>
         </ul>
         <div class="d-flex">
+          <%if(admin.email == "admin@event.hq"){ %>
           <a
             href="/admin"
             id="admin"
@@ -105,6 +108,7 @@
           >
             admin
           </a>
+          <%}%>
 
           <button
             id="logout"
@@ -116,34 +120,94 @@
         </div>
       </div>
     </nav>
-    <div class="main__container">
-      <h1 class="title__audiowide">EventHQ</h1>
-      <div class="selection">
-        <div class="users">
-          <a class="entity__card" href="./users"
-            ><i class="fa-solid fa-user-secret"></i>Users</a
-          >
+
+    <div class="container_detail">
+      <a class="btn_custom fixed" href="/admin/events" data-description="Back"
+        ><i class="fa-solid fa-caret-left"></i
+      ></a>
+      <div class="detail">
+        <%if(event) {%>
+        <h2 class="title_audiowide"><%=event.title%></h2>
+        <p class="text-center"><%=event.description%></p>
+        <span class="badge text-bg-dark"></span>
+        <button type="button" class="btn btn-sm btn-dark disabled mb-2">
+          <b><%=event.category%></b>
+        </button>
+
+        <div class="">
+          <p><b>Location:</b> <%=event.location%></p>
+          <p><b>Time: </b><%=new String(event.startDate).split('GMT')[0]%></p>
         </div>
-        <div class="orgs">
-          <a class="entity__card" href="./orgs"
-            ><i class="fa-solid fa-sitemap"></i>Organizations</a
-          >
+        <%}%>
+      </div>
+      <div class="btns">
+        <div class="btn_custom" data-description="Delete" id="delete">
+          <i class="fa-solid fa-trash"></i>
         </div>
-        <div class="events">
-          <a class="entity__card" href="./events"
-            ><i class="fa-solid fa-calendar-day"></i>Events</a
-          >
-        </div>
+        <a
+          class="btn_custom"
+          data-description="Edit"
+          id="edit"
+          href="/admin/events/edit/<%=event._id%>"
+        >
+          <i class="fa-solid fa-pen"></i>
+        </a>
       </div>
     </div>
+
     <!-- Toastify -->
     <script
       type="text/javascript"
       src="https://cdn.jsdelivr.net/npm/toastify-js"
     ></script>
+
     <!-- axios-->
     <script defer src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
+    <script>
+      document.getElementById("delete").addEventListener("click", () => {
+        CRUD.delete();
+      });
+      const CRUD = {
+        delete: async () => {
+          try {
+            const response = await axios.delete(
+              "/admin/events/<%=event._id%>",
+              {
+                model: "event",
+              }
+            );
+            if (response.data.delMsg) {
+              toast("Event successfully deleted!", "#019b5d");
+              setTimeout(() => {
+                toast("Redirecting you!", "#019b5d");
+              }, 1000);
+
+              setTimeout(() => {
+                window.location.href = `/admin/events`;
+              }, 2200);
+            } else {
+              toast("Some Error Occurred!", "#ff426b");
+            }
+          } catch {}
+        },
+      };
+
+      function toast(msg, clr) {
+        Toastify({
+          text: msg,
+          duration: 2000,
+          newWindow: true,
+          close: true,
+          gravity: "top",
+          position: "right",
+          stopOnFocus: true,
+          style: {
+            background: clr,
+          },
+        }).showToast();
+      }
+    </script>
     <script
       src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
       integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -159,7 +223,5 @@
       integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
       crossorigin="anonymous"
     ></script>
-
-    <script defer src="/admin/assets/logout.js"></script>
   </body>
 </html>

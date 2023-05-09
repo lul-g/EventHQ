@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>EventHQ | admin | users</title>
+    <title>EventHQ | admin | events</title>
     <link
       rel="shortcut icon"
       href="/private/assets/favicon.svg"
@@ -12,7 +12,7 @@
     />
 
     <link rel="stylesheet" href="/admin/assets/global_styles.css" />
-    <link rel="stylesheet" href="/admin/entities/users/style.css" />
+
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
@@ -88,7 +88,7 @@
   </head>
   <body>
     <section class="gradient-custom custom_gradient">
-      <a class="btn_custom fixed" href="/admin/users/<%=user._id%>"
+      <a class="btn_custom fixed" href="/admin/events/<%=event._id%>"
         ><i class="fa-solid fa-caret-left"></i
       ></a>
       <div class="container py-5 h-100">
@@ -100,7 +100,7 @@
             >
               <div class="card-body p-4 p-md-5">
                 <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">
-                  Edit <%=user.firstName%>'s information
+                  Edit <%=event.title%>'s information
                 </h3>
                 <form>
                   <div class="row">
@@ -108,82 +108,74 @@
                       <div class="form-outline">
                         <input
                           type="text"
-                          id="firstName"
+                          id="title"
                           class="form-control form-control-lg"
-                          value="<%=user.firstName%>"
+                          value="<%=event.title%>"
                         />
-                        <label class="form-label" for="firstName"
-                          >First Name</label
-                        >
+                        <label class="form-label" for="title">Title</label>
                       </div>
                     </div>
                     <div class="col-md-6 mb-4">
                       <div class="form-outline">
                         <input
                           type="text"
-                          id="lastName"
-                          value="<%=user.lastName%>"
-                          class="form-control form-control-lg"
-                        />
-                        <label class="form-label" for="lastName"
-                          >Last Name</label
-                        >
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-md-6 mb-4 d-flex align-items-center">
-                      <div class="form-outline datepicker w-100">
-                        <input
-                          type="text"
-                          class="form-control form-control-lg"
-                          id="username"
-                          value="<%=user.username%>"
-                        />
-                        <label for="username" class="form-label"
-                          >Username</label
-                        >
-                      </div>
-                    </div>
-                    <div class="col-md-6 mb-4 d-flex align-items-center">
-                      <div class="form-outline datepicker w-100">
-                        <input
-                          type="email"
-                          class="form-control form-control-lg"
-                          id="email"
-                          value="<%=user.email%>"
-                        />
-                        <label for="email" class="form-label">Email</label>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-md-6 mb-4 d-flex align-items-center">
-                      <div class="form-outline datepicker w-100">
-                        <input
-                          type="text"
-                          class="form-control form-control-lg"
                           id="location"
-                          value="<%=user.location%>"
+                          value="<%=event.location%>"
+                          class="form-control form-control-lg"
                         />
-                        <label for="location" class="form-label"
-                          >location</label
+                        <label class="form-label" for="location"
+                          >Location</label
                         >
                       </div>
                     </div>
                   </div>
-
+                  <div class="row">
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline">
+                        <input
+                          type="text"
+                          id="category"
+                          value="<%=event.category%>"
+                          class="form-control form-control-lg"
+                        />
+                        <label class="form-label" for="category"
+                          >Category</label
+                        >
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6 mb-4 d-flex align-items-center">
+                      <div class="form-outline datepicker w-100">
+                        <input
+                          type="text"
+                          class="form-control form-control-lg"
+                          id="startDate"
+                          value="<%=new Date(event.startDate).toISOString().split('T')[0]%>"
+                        />
+                        <label for="startDate" class="form-label"
+                          >Start Date</label
+                        >
+                      </div>
+                    </div>
+                    <div class="col-md-6 mb-4 d-flex align-items-center">
+                      <div class="form-outline datepicker w-100">
+                        <input
+                          type="text"
+                          class="form-control form-control-lg"
+                          id="endDate"
+                          placeholder="yyyy-mm-dd"
+                          value="<%= event.endDate ? new Date(event.endDate).toISOString().split('T')[0] : '' %>"
+                        />
+                        <label for="endDate" class="form-label">End Date</label>
+                      </div>
+                    </div>
+                  </div>
                   <div class="row">
                     <div class="col-12">
-                      <label for="bio">Bio</label>
-                      <textarea
-                        class="form-control"
-                        id="bio"
-                        placeholder="info-1, info-2, info-3"
-                      >
-  <%=user.bio%></textarea
+                      <label for="description">Description</label>
+                      <textarea class="form-control" id="description">
+<%=event.description%></textarea
                       >
                     </div>
                   </div>
@@ -230,76 +222,44 @@
     ></script>
 
     <script type="text/javascript">
-      async function editUser() {
-        let firstName = document.getElementById("firstName");
-        let lastName = document.getElementById("lastName");
-        let username = document.getElementById("username");
-        let email = document.getElementById("email");
+      async function editEvent() {
+        let title = document.getElementById("title");
         let location = document.getElementById("location");
-        let bio = document.getElementById("bio");
+        let description = document.getElementById("description");
+        let startDate = document.getElementById("startDate");
+        let endDate = document.getElementById("endDate");
+        let category = document.getElementById("category");
 
-        const userInfo = {
-          email: email.value ? email.value : "<%= user.email %>",
-          firstName: firstName.value,
-          username: username.value,
-          lastName: lastName.value,
+        if (!endDate.value) {
+          toast("Dates cannot be empty!", "#ff426b");
+          return;
+        }
+        const eventInfo = {
+          title: title.value,
           location: location.value,
-          bio: bio.value.split(","),
+          description: description.value,
+          category: category.value,
+          startDate: new Date(startDate.value).toISOString(),
+          endDate: new Date(endDate.value).toISOString(),
         };
-        const _id = "<%=user._id%>";
+        const _id = "<%=event._id%>";
         try {
-          const response = await axios.put(`/admin/users/edit/${_id}`, {
-            info: userInfo,
+          const response = await axios.put(`/admin/events/edit/${_id}`, {
+            info: eventInfo,
             _id: _id,
-            model: "user",
+            model: "event",
           });
           if (response.status == 200) {
-            Toastify({
-              text: "Successfully updated user's info!",
-              duration: 2000,
-              newWindow: true,
-              close: true,
-              gravity: "top",
-              position: "right",
-              stopOnFocus: true,
-              style: {
-                background: "#019b5d",
-              },
-              destination: "/auth",
-            }).showToast();
+            toast("You have successfully updated event!", "#019b5d");
             setTimeout(() => {
-              Toastify({
-                text: "Redirecting you!",
-                duration: 2000,
-                newWindow: true,
-                close: true,
-                gravity: "top",
-                position: "right",
-                stopOnFocus: true,
-                style: {
-                  background: "#019b5d",
-                },
-                destination: "/auth",
-              }).showToast();
+              toast("Redirecting you!", "#019b5d");
             }, 1000);
 
             setTimeout(() => {
-              window.location.href = `/admin/users/<%=user._id%>`;
+              window.location.href = `/admin/events/<%=event._id%>`;
             }, 2200);
           } else {
-            Toastify({
-              text: "Some error occured!",
-              duration: 2000,
-              newWindow: true,
-              close: true,
-              gravity: "top",
-              position: "right",
-              stopOnFocus: true,
-              style: {
-                background: "#ff426b",
-              },
-              destination: "/auth",
-            }).showToast();
+            toast("Some error occured!", "#ff426b");
           }
         } catch (error) {
           if (error.response) {
@@ -311,8 +271,23 @@
 
       document.getElementById("submit").addEventListener("click", () => {
         event.preventDefault();
-        editUser();
+        editEvent();
       });
+
+      function toast(msg, clr) {
+        Toastify({
+          text: msg,
+          duration: 2000,
+          newWindow: true,
+          close: true,
+          gravity: "top",
+          position: "right",
+          stopOnFocus: true,
+          style: {
+            background: clr,
+          },
+        }).showToast();
+      }
     </script>
   </body>
 </html>

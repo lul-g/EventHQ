@@ -166,11 +166,11 @@
                         <input
                           type="text"
                           class="form-control form-control-lg"
-                          id="location"
-                          value="<%=user.location%>"
+                          id="username"
+                          value="<%=user.username%>"
                         />
-                        <label for="location" class="form-label"
-                          >Location</label
+                        <label for="username" class="form-label"
+                          >Username</label
                         >
                       </div>
                     </div>
@@ -186,7 +186,21 @@
                       </div>
                     </div>
                   </div>
-
+                  <div class="row">
+                    <div class="col-md-6 mb-4 d-flex align-items-center">
+                      <div class="form-outline datepicker w-100">
+                        <input
+                          type="text"
+                          class="form-control form-control-lg"
+                          id="location"
+                          value="<%=user.location%>"
+                        />
+                        <label for="location" class="form-label"
+                          >Location</label
+                        >
+                      </div>
+                    </div>
+                  </div>
                   <div class="row">
                     <div class="col-12">
                       <label for="bio">Bio</label>
@@ -297,11 +311,13 @@
         let firstName = document.getElementById("firstName");
         let lastName = document.getElementById("lastName");
         let email = document.getElementById("email");
+        let username = document.getElementById("username");
         let location = document.getElementById("location");
         let bio = document.getElementById("bio");
 
         const userInfo = {
           email: email.value ? email.value : "<%= user.email %>",
+          username: username.value ? username.value : "<%= user.username %>",
           firstName: firstName.value,
           lastName: lastName.value,
           location: location.value,
@@ -311,8 +327,8 @@
         const UID = "<%=user._id%>";
         try {
           const response = await axios.put(`/users/${UID}/profile/edit`, {
-            userInfo: userInfo,
-            UID: UID,
+            info: userInfo,
+            _id: UID,
             model: "user",
           });
           if (response.status == 200) {

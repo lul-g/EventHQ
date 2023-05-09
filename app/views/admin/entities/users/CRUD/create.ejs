@@ -10,9 +10,6 @@
       href="/private/assets/favicon.svg"
       type="image/x-icon"
     />
-    <link rel="stylesheet" href="/admin/assets/global_styles.css" />
-    <link rel="stylesheet" href="/admin/entities/users/style.css" />
-    <script defer type="module" src="/admin/entities/users/users.js"></script>
 
     <!-- Toastify -->
     <link
@@ -25,59 +22,194 @@
       src="https://kit.fontawesome.com/b6798fcdf3.js"
       crossorigin="anonymous"
     ></script>
+
+    <!-- bootstrap -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+
+    <style>
+      .custom_gradient a {
+        color: #212529;
+        text-decoration: none !important;
+      }
+      .btn_custom.fixed {
+        position: fixed;
+        top: 4rem;
+        left: 5rem;
+      }
+      .btn_custom {
+        font-size: 1.2rem;
+        border: 1px solid #212529 !important;
+        box-shadow: 0 0 0.7rem 0 #21252958;
+        border-radius: 100% !important;
+
+        width: 3rem;
+        height: 3rem;
+        display: grid;
+        place-items: center;
+
+        text-align: center;
+
+        cursor: pointer;
+        position: relative;
+      }
+      .btn_custom::after {
+        content: attr(data-description);
+        position: absolute;
+        top: -2.5rem;
+        right: -5rem;
+
+        font-family: var(--txt-font-electrolize);
+        font-size: 1rem;
+
+        background-color: var(--txt-clr-grey);
+        color: #edf2f8;
+        border-radius: 5px;
+
+        width: 5rem;
+
+        opacity: 0;
+        pointer-events: none;
+      }
+      .btn_custom:hover::after {
+        opacity: 1;
+        transition: all 0.2s linear 0.7s;
+      }
+      .btn_custom:hover {
+        background-color: #ffffffbc;
+        box-shadow: 0 0 1.5rem 0 var(--txt-clr-black);
+        transition: all ease 0.3s;
+      }
+    </style>
   </head>
   <body>
-    <a class="btn fixed" href="/admin/users" data-description="Back"
-      ><i class="fa-solid fa-caret-left"></i
-    ></a>
+    <section class="gradient-custom custom_gradient">
+      <a class="btn_custom fixed" href="/admin/users" data-description="Back"
+        ><i class="fa-solid fa-caret-left"></i
+      ></a>
+      <div class="container py-5 h-100">
+        <div class="row justify-content-center align-items-center h-100">
+          <div class="col-12 col-lg-9 col-xl-7">
+            <div
+              class="card shadow-2-strong card-registration"
+              style="border-radius: 15px"
+            >
+              <div class="card-body p-4 p-md-5">
+                <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Create a user</h3>
+                <form>
+                  <div class="row">
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline">
+                        <input
+                          type="text"
+                          id="firstName"
+                          class="form-control form-control-lg"
+                        />
+                        <label class="form-label" for="firstName"
+                          >First Name</label
+                        >
+                      </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline">
+                        <input
+                          type="text"
+                          id="lastName"
+                          class="form-control form-control-lg"
+                        />
+                        <label class="form-label" for="lastName"
+                          >Last Name</label
+                        >
+                      </div>
+                    </div>
+                  </div>
 
-    <div class="create">
-      <h1 class="title__audiowide">Create a User</h1>
-      <form class="form">
-        <div class="name">
-          <label for="firstName">First Name: </label>
-          <input requiredtype="text" id="firstName" name="firstName" />
+                  <div class="row">
+                    <div class="col-md-6 mb-4 d-flex align-items-center">
+                      <div class="form-outline datepicker w-100">
+                        <input
+                          type="text"
+                          class="form-control form-control-lg"
+                          id="username"
+                          required
+                        />
+                        <label for="username" class="form-label"
+                          >Username</label
+                        >
+                      </div>
+                    </div>
+                    <div class="col-md-6 mb-4 d-flex align-items-center">
+                      <div class="form-outline datepicker w-100">
+                        <input
+                          type="password"
+                          class="form-control form-control-lg"
+                          id="password"
+                          required
+                        />
+                        <label for="password" class="form-label"
+                          >Password</label
+                        >
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6 mb-4 d-flex align-items-center">
+                      <div class="form-outline datepicker w-100">
+                        <input
+                          type="text"
+                          class="form-control form-control-lg"
+                          id="location"
+                        />
+                        <label for="location" class="form-label"
+                          >location</label
+                        >
+                      </div>
+                    </div>
+                    <div class="col-md-6 mb-4 d-flex align-items-center">
+                      <div class="form-outline datepicker w-100">
+                        <input
+                          type="email"
+                          class="form-control form-control-lg"
+                          id="email"
+                          required
+                        />
+                        <label for="email" class="form-label">Email</label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-12">
+                      <label for="bio">Bio</label>
+                      <textarea
+                        class="form-control"
+                        id="bio"
+                        placeholder="info-1, info-2, info-3"
+                      >
+                      </textarea>
+                    </div>
+                  </div>
+
+                  <div class="mt-4 pt-2">
+                    <input
+                      id="submit"
+                      class="btn btn-dark btn-lg"
+                      type="submit"
+                      value="Submit"
+                    />
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="lastName">
-          <label for="lastName">Last Name: </label>
-          <input requiredtype="text" id="lastName" lastName="name" />
-        </div>
-        <div class="location">
-          <label for="location">Location: </label>
-          <input requiredtype="location" id="location" name="location" />
-        </div>
-        <div class="username">
-          <label for="username">Username: </label>
-          <input required type="text" id="username" name="username" />
-        </div>
-        <div class="email">
-          <label for="email">Email: </label>
-          <input required type="email" id="email" name="email" />
-        </div>
-        <div class="password">
-          <label for="password">Password: </label>
-          <input required type="password" id="password" name="password" />
-        </div>
-        <div class="bio">
-          <label for="bio">Short Bio: </label>
-          <textarea
-            required
-            placeholder="info, some other thing, some info"
-            type="text"
-            id="bio"
-            name="bio"
-          ></textarea>
-        </div>
-        <button
-          class="submit btn__normal"
-          type="submit"
-          name="submit"
-          id="submit"
-        >
-          Create
-        </button>
-      </form>
-    </div>
+      </div>
+    </section>
     <!-- Toastify -->
     <script
       type="text/javascript"
@@ -114,6 +246,22 @@
         let email = document.getElementById("email");
         let password = document.getElementById("password");
 
+        if (!username.value || !password.value || !email.value) {
+          Toastify({
+            text: "Username, Password and email fields cannot be empty!",
+            duration: 2000,
+            newWindow: true,
+            close: true,
+            gravity: "top",
+            position: "right",
+            stopOnFocus: true,
+            style: {
+              background: "#ff426b",
+            },
+          }).showToast();
+          return;
+        }
+
         const userInfo = {
           firstName: firstName.value,
           lastName: lastName.value,
@@ -124,8 +272,9 @@
           password: password.value,
           email: email.value,
         };
+        console.log(userInfo);
         try {
-          const response = await axios.post(`/users/create`, {
+          const response = await axios.post(`/admin/users/create/user`, {
             userInfo: userInfo,
             model: "user",
           });
@@ -160,9 +309,12 @@
             setTimeout(() => {
               window.location.href = `/admin/users`;
             }, 2200);
-          } else {
+          }
+        } catch (error) {
+          if (error.response) {
+            const { data, status, headers } = error.response;
             Toastify({
-              text: "Some error occured!",
+              text: data.message,
               duration: 2000,
               newWindow: true,
               close: true,
@@ -175,11 +327,6 @@
               destination: "/auth",
             }).showToast();
           }
-        } catch (error) {
-          if (error.response) {
-            const { data, status, headers } = error.response;
-            console.log("Err: ", data);
-          }
         }
       }
 
@@ -188,5 +335,21 @@
         createUser();
       });
     </script>
+
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>

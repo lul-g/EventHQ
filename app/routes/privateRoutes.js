@@ -5,6 +5,10 @@ const getAll = require("../lib/getAll").getAll;
 const getOne = require("../lib/getOne").getOne;
 const updateOne = require("../lib/updateOne").updateOne;
 
+router.get("/", checkCookie, (req, res) => {
+  res.json(req.user);
+});
+
 router.post("/:id", checkCookie, async (req, res) => {
   const allDocs = await getAll(req, res, req.body.model);
   res.status(200).json({
@@ -23,10 +27,6 @@ router.get("/:id", checkCookie, async (req, res) => {
     events: events,
     orgs: orgs,
   });
-});
-
-router.get("/", checkCookie, (req, res) => {
-  res.json(req.user);
 });
 
 router.get("/:id/profile", checkCookie, async (req, res) => {

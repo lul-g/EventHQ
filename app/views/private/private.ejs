@@ -107,7 +107,10 @@
             href="./<%=user._id%>/profile"
           >
             <div class="row align-items-center">
-              <div class="col profile_icon" data-usernameInit="U"></div>
+              <div
+                class="col profile_icon"
+                data-usernameInit="<%=user.username.substr(0,1).toUpperCase() %>"
+              ></div>
               <span class="col logo_txt text-capitalize" id="username_txt"
                 ><%=user.username%></span
               >
@@ -141,18 +144,29 @@
           Orgs
         </label>
       </div>
-      <div class="container row justify-content-center">
+      <div class="container row justify-content-center data-cont">
         <div
           data-model-data="events"
           class="events d-flex data-cards mt-5 align-items-start justify-content-center flex-wrap"
         >
-          <% events.forEach((event)=> { %>
+          <%if(events.length == 0) {%>
+          <h4
+            style="
+              position: relative;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+            "
+          >
+            No events at this Time!
+          </h4>
+          <%} else {%> <% events.forEach((event)=> { %>
           <div class="card-cont" style="width: 18rem">
             <span class="fav">
               <i class="fa-regular fa-heart"></i>
             </span>
             <a
-              href="private/events/<%=event._id%>?uid=<%=user._id%>"
+              href="/private/events/<%=event._id%>?uid=<%=user._id%>"
               class="text-dark card border-dark"
               style="width: 18rem"
             >
@@ -174,13 +188,24 @@
               </div>
             </a>
           </div>
-          <% }) %>
+          <% })} %>
         </div>
         <div
           data-model-data="orgs"
           class="orgs data-cards mt-5 d-none align-items-start justify-content-center flex-wrap"
         >
-          <% orgs.forEach((org)=> { %>
+          <%if(orgs.length == 0) {%>
+          <h4
+            style="
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+            "
+          >
+            No organizations at this time!
+          </h4>
+          <%} else {%> <% orgs.forEach((org)=> { %>
           <div class="card-cont" style="width: 18rem">
             <span class="fav">
               <i class="fa-regular fa-heart"></i>
@@ -206,7 +231,7 @@
               </div>
             </a>
           </div>
-          <% }) %>
+          <% })} %>
         </div>
       </div>
     </div>

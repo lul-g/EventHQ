@@ -6,13 +6,20 @@
 }
 
 :root {
-  --font-title: ;
-  --bg-clr: #edf2f8;
-  --txt-clr-black: #000000;
+  --bg-clr: #f8f9fa;
+  --txt-clr-black: #343a40;
   --txt-clr-grey: #000000a6;
-  --title-clr: #212529;
+  --main-clr: #ff426b;
+  --title-clr: #343a40;
   --title-font-audiowide: "Audiowide", cursive;
   --txt-font-electrolize: "Electrolize", sans-serif;
+}
+
+.main a,
+.main__container a,
+.container_detail a {
+  text-decoration: none !important;
+  color: var(--txt-clr-black) !important;
 }
 
 body {
@@ -22,12 +29,6 @@ body {
   height: 100vh;
 
   background-color: var(--bg-clr);
-}
-a,
-li {
-  text-decoration: none;
-  list-style: none;
-  color: var(--txt-clr-black);
 }
 
 /* shared css between the 3 entity pages */
@@ -50,27 +51,28 @@ li {
 }
 
 /* components / property classes*/
-.btn.fixed {
+.btn_custom.fixed {
   position: fixed;
-  top: 2.5rem;
+  top: 6rem;
   left: 5rem;
 }
-.btn {
+.btn_custom {
   font-size: 1.2rem;
-  border: 1px solid #212529;
+  border: 1px solid #212529 !important;
   box-shadow: 0 0 0.7rem 0 #21252958;
-  border-radius: 100%;
+  border-radius: 100% !important;
 
-  width: 2.5rem;
-  height: 2.5rem;
-  line-height: 2.5rem;
+  width: 3rem;
+  height: 3rem;
+  display: grid;
+  place-items: center;
 
   text-align: center;
 
   cursor: pointer;
   position: relative;
 }
-.btn::after {
+.btn_custom::after {
   content: attr(data-description);
   position: absolute;
   top: -2.5rem;
@@ -83,22 +85,23 @@ li {
   color: #edf2f8;
   border-radius: 5px;
 
-  width: 5rem;
+  width: 6rem;
+  padding: 0.5rem 0;
 
   opacity: 0;
   pointer-events: none;
 }
-.btn:hover::after {
+.btn_custom:hover::after {
   opacity: 1;
   transition: all 0.2s linear 0.7s;
 }
-.btn:hover {
+.btn_custom:hover {
   background-color: #ffffffbc;
   box-shadow: 0 0 1.5rem 0 var(--txt-clr-black);
   transition: all ease 0.3s;
 }
 .btn__top {
-  top: 2.5rem;
+  top: 6rem;
 }
 .btn__right {
   position: fixed;
@@ -129,7 +132,7 @@ li {
   box-shadow: 0 0 1.5rem 0 var(--txt-clr-black);
   transition: all ease 0.3s;
 }
-.card {
+.card_custom {
   box-shadow: 0 0 0.5rem 0 #939393;
 
   width: 15rem;
@@ -186,4 +189,47 @@ li {
   box-shadow: 0 0 2rem 0 #000000b6;
   transform: scale(1.1);
   transition: all ease 0.3s;
+}
+
+/* bootstrap */
+nav {
+  width: 100% !important;
+}
+.profile_icon {
+  --size: 2rem;
+  width: var(--size);
+  height: var(--size);
+  position: relative;
+
+  border: 1px solid #ff426b;
+  border-radius: 5px;
+}
+.profile_icon::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  content: attr(data-usernameInit);
+  color: #f8f9fa;
+}
+.profile_icon_cont:hover > .row > .profile_icon {
+  transition: all 0.3s ease;
+  background-color: #ff426b;
+  color: #343a40;
+}
+.navbar-brand {
+  margin-right: 10rem !important;
+}
+.navbar-nav {
+  justify-content: space-between;
+}
+.flex .navbar-brand {
+  margin-right: 2rem !important;
+}
+.flex {
+  display: flex;
+  align-items: center;
+}
+.logo_txt {
+  color: #f8f9fa;
 }

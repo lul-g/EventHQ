@@ -11,14 +11,6 @@
       type="image/x-icon"
     />
 
-    <link rel="stylesheet" href="/admin/assets/global_styles.css" />
-    <link rel="stylesheet" href="/admin/entities/users/style.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-      crossorigin="anonymous"
-    />
     <!-- Toastify -->
     <link
       rel="stylesheet"
@@ -30,6 +22,14 @@
       src="https://kit.fontawesome.com/b6798fcdf3.js"
       crossorigin="anonymous"
     ></script>
+
+    <!-- bootstrap -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
 
     <style>
       .custom_gradient a {
@@ -88,19 +88,19 @@
   </head>
   <body>
     <section class="gradient-custom custom_gradient">
-      <a class="btn_custom fixed" href="/admin/users/<%=user._id%>"
+      <a class="btn_custom fixed" href="/admin/orgs" data-description="Back"
         ><i class="fa-solid fa-caret-left"></i
       ></a>
       <div class="container py-5 h-100">
         <div class="row justify-content-center align-items-center h-100">
-          <div class="col-lg-10 col-12">
+          <div class="col-12 col-lg-9 col-xl-7">
             <div
               class="card shadow-2-strong card-registration"
               style="border-radius: 15px"
             >
               <div class="card-body p-4 p-md-5">
                 <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">
-                  Edit <%=user.firstName%>'s information
+                  Create an organization
                 </h3>
                 <form>
                   <div class="row">
@@ -108,68 +108,37 @@
                       <div class="form-outline">
                         <input
                           type="text"
-                          id="firstName"
+                          id="name"
                           class="form-control form-control-lg"
-                          value="<%=user.firstName%>"
                         />
-                        <label class="form-label" for="firstName"
-                          >First Name</label
-                        >
+                        <label class="form-label" for="name">Name</label>
                       </div>
                     </div>
                     <div class="col-md-6 mb-4">
                       <div class="form-outline">
                         <input
                           type="text"
-                          id="lastName"
-                          value="<%=user.lastName%>"
-                          class="form-control form-control-lg"
-                        />
-                        <label class="form-label" for="lastName"
-                          >Last Name</label
-                        >
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-md-6 mb-4 d-flex align-items-center">
-                      <div class="form-outline datepicker w-100">
-                        <input
-                          type="text"
-                          class="form-control form-control-lg"
-                          id="username"
-                          value="<%=user.username%>"
-                        />
-                        <label for="username" class="form-label"
-                          >Username</label
-                        >
-                      </div>
-                    </div>
-                    <div class="col-md-6 mb-4 d-flex align-items-center">
-                      <div class="form-outline datepicker w-100">
-                        <input
-                          type="email"
-                          class="form-control form-control-lg"
-                          id="email"
-                          value="<%=user.email%>"
-                        />
-                        <label for="email" class="form-label">Email</label>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-md-6 mb-4 d-flex align-items-center">
-                      <div class="form-outline datepicker w-100">
-                        <input
-                          type="text"
-                          class="form-control form-control-lg"
                           id="location"
-                          value="<%=user.location%>"
+                          class="form-control form-control-lg"
                         />
-                        <label for="location" class="form-label"
-                          >location</label
+                        <label class="form-label" for="location"
+                          >Location</label
+                        >
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6 mb-4 d-flex align-items-center">
+                      <div class="form-outline datepicker w-100">
+                        <input
+                          type="text"
+                          class="form-control form-control-lg"
+                          id="createdAt"
+                          placeholder="yyyy-mm-dd"
+                        />
+                        <label for="createdAt" class="form-label"
+                          >Founded on</label
                         >
                       </div>
                     </div>
@@ -177,14 +146,12 @@
 
                   <div class="row">
                     <div class="col-12">
-                      <label for="bio">Bio</label>
+                      <label for="description">Description</label>
                       <textarea
-                        class="form-control"
-                        id="bio"
+                        class="form-control text-left"
+                        id="description"
                         placeholder="info-1, info-2, info-3"
-                      >
-  <%=user.bio%></textarea
-                      >
+                      ></textarea>
                     </div>
                   </div>
 
@@ -203,7 +170,6 @@
         </div>
       </div>
     </section>
-
     <!-- Toastify -->
     <script
       type="text/javascript"
@@ -230,32 +196,42 @@
     ></script>
 
     <script type="text/javascript">
-      async function editUser() {
-        let firstName = document.getElementById("firstName");
-        let lastName = document.getElementById("lastName");
-        let username = document.getElementById("username");
-        let email = document.getElementById("email");
+      async function createOrg() {
+        let name = document.getElementById("name");
         let location = document.getElementById("location");
-        let bio = document.getElementById("bio");
+        let description = document.getElementById("description");
+        let createdAt = document.getElementById("createdAt");
 
-        const userInfo = {
-          email: email.value ? email.value : "<%= user.email %>",
-          firstName: firstName.value,
-          username: username.value,
-          lastName: lastName.value,
+        if (!name.value || !description.value) {
+          Toastify({
+            text: "Name and description cannot be empty!",
+            duration: 2000,
+            newWindow: true,
+            close: true,
+            gravity: "top",
+            position: "right",
+            stopOnFocus: true,
+            style: {
+              background: "#ff426b",
+            },
+          }).showToast();
+          return;
+        }
+
+        const orgInfo = {
+          name: name.value,
+          description: description.value,
           location: location.value,
-          bio: bio.value.split(","),
+          createdAt: createdAt.value,
         };
-        const _id = "<%=user._id%>";
         try {
-          const response = await axios.put(`/admin/users/edit/${_id}`, {
-            info: userInfo,
-            _id: _id,
-            model: "user",
+          const response = await axios.post(`/admin/orgs/create/org`, {
+            orgInfo: orgInfo,
           });
+          console.log(response);
           if (response.status == 200) {
             Toastify({
-              text: "Successfully updated user's info!",
+              text: "You have successfully added a single organization!",
               duration: 2000,
               newWindow: true,
               close: true,
@@ -265,7 +241,6 @@
               style: {
                 background: "#019b5d",
               },
-              destination: "/auth",
             }).showToast();
             setTimeout(() => {
               Toastify({
@@ -279,16 +254,18 @@
                 style: {
                   background: "#019b5d",
                 },
-                destination: "/auth",
               }).showToast();
             }, 1000);
 
             setTimeout(() => {
-              window.location.href = `/admin/users/<%=user._id%>`;
+              window.location.href = `/admin/orgs`;
             }, 2200);
-          } else {
+          }
+        } catch (error) {
+          if (error.response) {
+            const { data, status, headers } = error.response;
             Toastify({
-              text: "Some error occured!",
+              text: data.message,
               duration: 2000,
               newWindow: true,
               close: true,
@@ -301,18 +278,29 @@
               destination: "/auth",
             }).showToast();
           }
-        } catch (error) {
-          if (error.response) {
-            const { data, status, headers } = error.response;
-            console.log("Err: ", data);
-          }
         }
       }
 
-      document.getElementById("submit").addEventListener("click", () => {
+      document.getElementById("submit").addEventListener("click", (event) => {
         event.preventDefault();
-        editUser();
+        createOrg();
       });
     </script>
+
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>

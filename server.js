@@ -1,6 +1,7 @@
-const config = require("./app/config/config");
-const port = config.port;
-console.log(port);
+const dotenv = require("dotenv");
+dotenv.config();
+
+const port = process.env.PORT;
 
 const express = require("express");
 const app = express();

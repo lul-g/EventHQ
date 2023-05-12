@@ -162,8 +162,16 @@
           </h4>
           <%} else {%> <% events.forEach((event)=> { %>
           <div class="card-cont" style="width: 18rem">
-            <span class="fav">
+            <span
+              class="fav"
+              onclick="like.event()"
+              data-event="<%=event._id%>"
+            >
+              <% if(user.attending.includes(event._id.toString())) {%>
+              <i class="fa-solid fa-heart"></i>
+              <%} else {%>
               <i class="fa-regular fa-heart"></i>
+              <% } %>
             </span>
             <a
               href="/private/events/<%=event._id%>?uid=<%=user._id%>"
@@ -207,8 +215,12 @@
           </h4>
           <%} else {%> <% orgs.forEach((org)=> { %>
           <div class="card-cont" style="width: 18rem">
-            <span class="fav">
+            <span class="fav" onclick="like.org()" data-org="<%=org._id%>">
+              <% if(user.memberships.includes(org._id.toString())) {%>
+              <i class="fa-solid fa-heart"></i>
+              <%} else {%>
               <i class="fa-regular fa-heart"></i>
+              <% } %>
             </span>
             <a
               href="/private/orgs/<%=org._id%>?uid=<%=user._id%>"
@@ -286,8 +298,18 @@
 
     <script defer src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
+    <script>
+      function returnEvents() {
+        return "<%=user.attending%>";
+      }
+      function returnOrgs() {
+        return "<%=user.memberships%>";
+      }
+    </script>
+
     <script defer src="/private/assets/view.js"></script>
     <script defer src="/private/assets/logout.js"></script>
+    <script defer src="/private/assets/like.js"></script>
     <script
       src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
       integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

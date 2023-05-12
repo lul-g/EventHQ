@@ -13,7 +13,6 @@ document.querySelectorAll(".data-cards .fav").forEach((heart_cont) => {
 
 document.querySelectorAll(".btn-group .view-btn").forEach((btn) => {
   btn.addEventListener("click", () => {
-    console.log(event.target.dataset);
     if (event.target.dataset.model == "events") {
       document.querySelector(".events").classList.replace("d-none", "d-flex");
       document.querySelector(".orgs").classList.replace("d-flex", "d-none");

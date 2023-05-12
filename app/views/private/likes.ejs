@@ -7,7 +7,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-    <title>EventHQ | <%=event.title%> Detail</title>
+    <title>EventHQ</title>
     <link
       rel="shortcut icon"
       href="/private/assets/favicon.svg"
@@ -29,11 +29,7 @@
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a
-        class="navbar-brand links"
-        href="../../users/<%=user._id%>"
-        data-route=""
-      >
+      <a class="navbar-brand links" href="./<%=user._id%>" data-route="">
         <img
           src="/public/assets/logo.png"
           width="30"
@@ -60,28 +56,28 @@
           <li class="nav-item active pr-5">
             <a
               class="nav-link links"
-              href="../../users/<%=user._id%>"
+              href="/users/<%=user._id%>"
               data-route="home"
               >Home <span class="sr-only">(current)</span></a
             >
           </li>
           <li class="nav-item pr-5">
-            <a class="nav-link links" href="/private/about" data-route="about"
+            <a
+              class="nav-link links"
+              href="/private/about?uid=<%=user._id%>"
+              data-route="about"
               >About</a
             >
           </li>
           <li class="nav-item pr-5">
-            <a
-              class="nav-link links"
-              href="./<%=user._id%>/likes"
-              data-route="likes"
+            <a class="nav-link links" href="./likes" data-route="likes"
               >Likes</a
             >
           </li>
           <li class="nav-item pr-5">
             <a
               class="nav-link links"
-              href="./<%=user._id%>/memberships"
+              href="./memberships"
               data-route="emberships"
               >Memberships</a
             >
@@ -89,19 +85,32 @@
           <li class="nav-item">
             <a
               class="nav-link links"
-              href="/private/contact"
+              href="/private/contact?uid=<%=user._id%>"
               data-route="contact"
               >Contact</a
             >
           </li>
         </ul>
         <div class="d-flex">
+          <%if(user.email == "admin@event.hq"){ %>
+          <a
+            href="/admin"
+            id="admin"
+            class="mr-5 btn btn-light my-2 my-sm-0"
+            type="submit"
+          >
+            admin
+          </a>
+          <%}%>
           <a
             class="links d-flex align-items-center justify-content-center text-decoration-none profile_icon_cont"
             href="./<%=user._id%>/profile"
           >
             <div class="row align-items-center">
-              <div class="col profile_icon" data-usernameInit="U"></div>
+              <div
+                class="col profile_icon"
+                data-usernameInit="<%=user.username.substr(0,1).toUpperCase() %>"
+              ></div>
               <span class="col logo_txt text-capitalize" id="username_txt"
                 ><%=user.username%></span
               >
@@ -118,79 +127,119 @@
       </div>
     </nav>
 
-    <div class="eventDetails container mt-5">
-      <h1 class="title"><%=event.title%></h1>
-      <p class="text-muted"><%=event.category%></p>
-      <div class="description container mt-5">
-        <h3 class="title">About this event</h3>
-        <p class="text-muted"><%=event.description%></p>
+    <div class="main mt-5">
+      <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <label class="view-btn btn btn-outline-dark active" data-model="events">
+          <input
+            class=""
+            type="radio"
+            name="options"
+            id="option1"
+            autocomplete="off"
+            checked
+          />
+          Events
+        </label>
       </div>
-      <div
-        class="container d-flex align-items-center justify-content-start mt-5"
-      >
-        <div class="time d-flex align-items-center justify-content-center">
-          <div class="icon_E">
-            <i class="fa-solid fa-calendar-day"></i>
+      <div class="container row justify-content-center data-cont">
+        <div
+          data-model-data="events"
+          class="events d-flex data-cards mt-5 align-items-start justify-content-center flex-wrap"
+        >
+          <%if(user.attending.length == 0) {%>
+          <h4
+            style="
+              position: relative;
+              top: 40%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+            "
+          >
+            No liked events at this Time!
+          </h4>
+          <%} else {%> <% events.forEach((event)=> { %> <%
+          if(user.attending.includes(event._id.toString())) {%>
+          <div class="card-cont" style="width: 18rem">
+            <span
+              class="fav"
+              onclick="like.event()"
+              data-event="<%=event._id%>"
+            >
+              <% if(user.attending.includes(event._id.toString())) {%>
+              <i class="fa-solid fa-heart"></i>
+              <%} else {%>
+              <i class="fa-regular fa-heart"></i>
+              <% } %>
+            </span>
+            <a
+              href="/private/events/<%=event._id%>?uid=<%=user._id%>"
+              class="text-dark card border-dark"
+              style="width: 18rem"
+            >
+              <div class="card-header">
+                <h5 class="text-dark"><%= event.title%></h5>
+              </div>
+              <div class="card-body">
+                <h6 class="card-subtitle mb-2 text-dark">
+                  <%= event.startDate%>
+                </h6>
+                <h6 class="card-subtitle mb-2 text-muted">
+                  <%=event.location%>
+                </h6>
+                <p class="card-text"><%=event.description%></p>
+                <div class="card-text mt-3">
+                  <i class="fa-solid fa-users"></i>
+                  <b><%= event.attendees.length%> showing up</b>
+                </div>
+              </div>
+            </a>
           </div>
-          <div class="txt">
-            <h3 class="title">When and where</h3>
-            <p class="text text-muted">
-              <%=new Date(event.startDate).toLocaleString('en-US', { weekday:
-              'short', day: 'numeric', month: 'short', year: 'numeric', hour:
-              'numeric', minute: '2-digit', hour12: true })%>
-            </p>
-          </div>
-        </div>
-        <div class="location d-flex align-items-center justify-content-between">
-          <div class="time d-flex align-items-center justify-content-center">
-            <div class="icon_E">
-              <i class="fa-solid fa-location-dot"></i>
-            </div>
-            <div class="txt">
-              <h3 class="title">Location</h3>
-              <p class="text text-muted"><%=event.location%></p>
-            </div>
-          </div>
+          <%}%> <% })} %>
         </div>
       </div>
     </div>
+
     <footer class="container">
       <div
         class="d-flex justify-content-sm-between justify-content-center align-items-center py-5 mt-5 border-top flew-row flex-wrap"
       >
         <p class="mb-0 text-muted order-3">© 2022 Company, Inc</p>
-        <a href="../../users/<%=user._id%>" class="links order-1">
+        <a href="/users/<%=user._id%>" class="links order-1">
           <img src="/public/assets/logo.png" alt="" style="width: 50px" />
         </a>
         <ul class="nav order-2">
           <li class="nav-item">
             <a
-              href="../../users/<%=user._id%>"
+              href="/users/<%=user._id%>"
               class="links nav-link px-2 text-muted"
               >Home</a
             >
           </li>
           <li class="nav-item">
-            <a href="/private/about" class="links nav-link px-2 text-muted"
+            <a
+              href="/private/about?uid=<%=user._id%>"
+              class="links nav-link px-2 text-muted"
               >About</a
             >
           </li>
           <li class="nav-item">
             <a
-              href="./<%=user._id%>/likes"
+              href="/users/<%=user._id%>/likes"
               class="links nav-link px-2 text-muted"
               >Likes</a
             >
           </li>
           <li class="nav-item">
             <a
-              href="./<%=user._id%>/memberships"
+              href="/users/<%=user._id%>/memberships"
               class="links nav-link px-2 text-muted"
               >Memberships</a
             >
           </li>
           <li class="nav-item">
-            <a href="/private/contact" class="links nav-link px-2 text-muted"
+            <a
+              href="/private/contact?uid=<%=user._id%>"
+              class="links nav-link px-2 text-muted"
               >Contact</a
             >
           </li>
@@ -200,7 +249,18 @@
 
     <script defer src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
+    <script>
+      function returnEvents() {
+        return "<%=user.attending%>";
+      }
+      function returnOrgs() {
+        return "<%=user.memberships%>";
+      }
+    </script>
+
+    <script defer src="/private/assets/view.js"></script>
     <script defer src="/private/assets/logout.js"></script>
+    <script defer src="/private/assets/like.js"></script>
     <script
       src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
       integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

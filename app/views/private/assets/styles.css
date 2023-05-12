@@ -88,6 +88,8 @@
 }
 
 .fav i {
+  pointer-events: none;
+
   position: absolute;
   color: #f8f9fa;
   top: 50%;

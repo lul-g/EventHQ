@@ -15,13 +15,14 @@
     "toastify-js": "^1.12.0"
   },
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "build": "npm i"
   },
   "name": "eventhq",
   "description": "Here's an explanation of the folder structure for this app.",
   "version": "1.0.0",
   "main": "server.js",
   "keywords": [],
-  "author": "",
+  "author": "Lulseged Admasu, Teddy Amare, Tedla Tafari",
   "license": "ISC"
 }

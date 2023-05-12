@@ -1,3 +1,6 @@
+.data-cont {
+  min-height: 45vh;
+}
 .profile_icon {
   --size: 2rem;
   width: var(--size);
@@ -41,8 +44,6 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-
-  min-height: 100vh !important;
 }
 
 .btn {
@@ -87,6 +88,8 @@
 }
 
 .fav i {
+  pointer-events: none;
+
   position: absolute;
   color: #f8f9fa;
   top: 50%;

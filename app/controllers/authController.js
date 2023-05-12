@@ -1,16 +1,16 @@
 const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
 const path = require("path");
 
 const express = require("express");
 const app = express();
 
+const bcrypt = require("bcrypt");
+const salt = "$2b$10$Imnq7Q2r0RS7DqaKV0rpPe";
+
 const jwt = require("jsonwebtoken");
 const jwt_expiration = 86400000;
 const jwtsalt = "privatekey";
 const cookieParser = require("cookie-parser");
-
-const salt = "$2b$10$Imnq7Q2r0RS7DqaKV0rpPe";
 
 const User = require("../models/user");
 

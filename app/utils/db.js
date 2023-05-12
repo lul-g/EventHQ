@@ -1,8 +1,10 @@
 const { ServerApiVersion } = require("mongodb");
 const mongoose = require("mongoose");
 
-const config = require("../config/config");
-const uri = config.dbUrl;
+const dotenv = require("dotenv");
+dotenv.config();
+
+const uri = process.env.DB_URL;
 
 async function connectToDb() {
   try {

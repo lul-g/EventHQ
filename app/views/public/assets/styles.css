@@ -1,3 +1,6 @@
+.data-cont {
+  min-height: 45vh;
+}
 .navbar-brand {
   margin-right: 10rem !important;
 }

@@ -1,0 +1,97 @@
+.entity {
+  width: fit-content;
+}
+.card_custom {
+  width: 35rem;
+}
+.orgs__list {
+  grid-template-columns: repeat(1, auto);
+}
+
+/* detail page*/
+.container {
+  width: 100%;
+  margin-top: 5rem;
+}
+.detail {
+  width: 40vw;
+  height: 60vh;
+  margin: auto;
+
+  box-shadow: 0 0 0.5rem 0 #000;
+  padding: 2rem;
+
+  border-radius: 10px;
+
+  --mb-val: 2rem;
+}
+.detail h2 {
+  text-align: center;
+  margin-bottom: var(--mb-val);
+}
+.time {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0 2rem;
+  margin-bottom: var(--mb-val);
+}
+span i {
+  padding-right: 0.5rem;
+}
+
+.para {
+  margin-bottom: var(--mb-val);
+}
+.keywords {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  gap: 1rem 0;
+  text-align: center;
+}
+.btns {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0 7rem;
+  margin-top: 4rem;
+}
+
+/* create page */
+.create {
+  margin: 3rem auto;
+  width: fit-content;
+}
+.create h1 {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+.form {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 1rem 0;
+  flex-direction: column;
+}
+.form > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0 1rem;
+  width: 20rem;
+}
+.form > div label {
+  font-family: var(--txt-font-electrolize);
+  font-weight: 600;
+}
+.form > div input,
+.form > div textarea {
+  width: 10rem;
+
+  border-radius: 4px;
+  padding: 0.5rem 3rem 0.5rem 1rem;
+
+  outline: none;
+  border: none;
+  border: 1px solid;
+}
